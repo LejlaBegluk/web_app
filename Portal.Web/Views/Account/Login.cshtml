@@ -1,0 +1,48 @@
+﻿
+@using Portal.Data.Entities
+@using Portal.Data.ViewModels
+@using Microsoft.AspNetCore.Identity
+@model LoginViewModel
+
+@inject SignInManager<User> SignInManager
+
+
+<div class="row">
+    <div class="col-md-6 offset-md-3 p-4 shadow-lg  mb-5 bg-white rounded">
+        <form asp-controller="Account" asp-action="Login" method="post" class="w-100">
+            <input type="hidden" asp-for="ReturnUrl" />
+            @if (Model.EmailConfirmed)
+            {
+                <h2>Email confirm successfully</h2>
+            }
+            @if (Model.PasswordReset)
+            {
+                <h2>Your password has been reset.</h2>
+            }
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Email" class=" control-label"></label>
+                <input asp-for="Email" class="form-control" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Password" class=" control-label"></label>
+                <input asp-for="Password" class="form-control" />
+                <span asp-validation-for="Password" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" class="btn btn-primary" value="Log in" />
+            </div>
+            <div class="form-group">
+                <p>
+                    <a id="forgot-password" asp-action="ForgotPassword">Forgot your password?</a>
+                </p>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

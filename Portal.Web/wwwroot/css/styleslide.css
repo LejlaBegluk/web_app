@@ -1,0 +1,111 @@
+/*=========================================slideshow==================================*/
+
+.post-slider {
+    position:relative;
+
+}
+    .post-slider .slider-title{
+        text-align:center;
+        margin:30px auto;
+        
+      
+    }
+h1, h2, h3, h4, h5, h6, h7 {
+    font-family: Arial;
+    color: #444;
+}
+    .post-slider .post-wrapper {
+        width: 84%;
+        height: 350px;
+        margin: 0px auto;
+        overflow: hidden;
+        padding:10px 0px 10px 0px;
+        border-radius:5px;
+    }
+    .post-slider .next {
+        position: absolute;
+        top: 50%;
+        right: 30px;
+        font-size: 2em;
+        color:#006669;
+        cursor:pointer;
+    }
+.post-slider .prev {
+    position: absolute;
+    top: 50%;
+    left: 30px;
+    color: #006669;
+    font-size: 2em;
+    cursor: pointer;
+}
+        .post-slider .post-wrapper .post {
+            width: 400px;
+            height: 400px;
+            display: inline-block;
+            margin:0px 10px;
+            box-shadow: 1rem 1rem 1rem -1rem #a0a0a033;
+        }
+
+            .post-slider .post-wrapper .post .slider-image {
+                width: 100%;
+                height: 200px;
+                border-radius: 5px;
+            }
+
+            .post-slider .post-wrapper .post .post-info{
+                height:300px;
+                padding:0px 5px;
+            }
+
+.page-wrapper .post .post-info a:hover {
+    color: #006669;
+    text-decoration: none;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+/*---------------photo slider--------------*/
+.wrapper {
+    width: 630px;
+    height: 380px;
+    margin: 15px auto;
+    padding: 20px 0;
+}
+.slick-track {
+    height: 400px;
+}
+.slick-slide {
+    color: #000;
+    padding: 50px 0;
+    font-family: loto;
+    text-align: center;
+}
+.slick-dots{
+    bottom:-50%;
+}
+    .slick-dots li {
+        display: inline-block;
+        background: #aeaeae;
+        /*margin: 10px 5px;*/
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        position: absolute;
+        bottom: 1px;
+    }
+.slick-track {
+    margin: 0 auto;
+}
+
+
+/*--------------*/
+.content-container span {
+    font-style: italic;
+}
+
+/*Pool wrapper*/
+#PollWrapper{
+    margin:auto;
+}

@@ -1,0 +1,36 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using Microsoft.AspNetCore.Mvc
+@using Portal.Data.Entities
+@inject SignInManager<User> SignInManager
+@inject UserManager<User> UserManager
+@if (SignInManager.IsSignedIn(User) && (User.IsInRole("Administrator") || User.IsInRole("Editor") || User.IsInRole("Journalist")))
+{
+    <li class="nav-item">
+        <a class="nav-link " asp-area="" asp-controller="Articles" asp-action="Index">Article Management</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link " asp-area="" asp-controller="Categories" asp-action="Index">Categories</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link " asp-area="" asp-controller="Polls" asp-action="Index">Polls</a>
+    </li>
+}
+
+@if (SignInManager.IsSignedIn(User) && User.IsInRole("Administrator"))
+{
+    <li class="nav-item">
+        <a class="nav-link " asp-area="" asp-controller="Admin" asp-action="UserManagement">Users</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link " asp-area="" asp-controller="Admin" asp-action="RoleManagement">Roles</a>
+    </li>
+
+}
+@if (SignInManager.IsSignedIn(User) && (User.IsInRole("Administrator") || User.IsInRole("Editor")))
+{
+<li class="nav-item">
+    <a class="nav-link " asp-area="" asp-controller="Report" asp-action="Report">
+       Reporting
+    </a>
+</li>
+        }

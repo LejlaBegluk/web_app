@@ -1,0 +1,161 @@
+﻿@model Portal.Data.ViewModels.Poll.PollViewModel
+
+@{
+    ViewData["Title"] = "Edit";
+    int rowNo = (int)ViewBag.Number;
+}
+
+<h1 style="text-align:center">Edit poll</h1>
+<hr />
+<div class="col-md-12 col-sm-12 col-xs-12">
+    <div class="x_panel">
+        <div class="x_content">
+            <div class="col-md-8 offset-md-3 p-4 shadow-lg  mb-5 bg-white rounded" style="margin:auto;">
+                <form asp-action="Edit">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        @Html.HiddenFor(model => model.Id)
+                        @Html.HiddenFor(model => model.UserId)
+                        @Html.HiddenFor(model => model.CreateDate)
+                        @Html.HiddenFor(model => model.UpdateDate)
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.Question, new { @class = "control-label col-md-4 col-sm-3" })
+                                @Html.TextBoxFor(model => model.Question, new { @class = "form-control", autocomplete = "off" })
+                                @Html.ValidationMessageFor(model => model.Question, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.Active, new { @class = "control-label col-md-2 col-sm-2" })
+                                @if (Model.IsEditor)
+                                {
+                                    @Html.CheckBoxFor(model => model.Active, new { @style = "width: 30px;height: 30px;" })
+                                }
+                                else
+                                {
+                                    @Html.CheckBoxFor(model => model.Active, new { @disabled = "disabled", @style = "width: 30px;height: 30px;" })
+                                }
+
+                            </div>
+                            <div class="btn-group fa-pull-right">
+                                <button type="submit" class="btn btn-primary">Submit</button>
+                                <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+                            </div>
+
+                        </div>
+                </form>
+                <hr />
+                <br />
+                <h3 style="text-align:left">Poll answers</h3>
+                <a class="btn btn-sm btn-primary" style="margin-bottom:20px;" asp-action="Create" asp-controller="PollAnswers" asp-route-pollID="@Model.Id" id="AnswerPopupBtn" title="Create"><i class="fa fa-plus" style="color:#fff; font-size:17px;"></i> Create an answer</a>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="table">
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr class="headings">
+                                        <th class="column-title">#</th>
+                                        <th class="column-title">Answer</th>
+                                        <th class="column-title">Vote number</th>
+                                        <th class="column-title"></th>
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @if (!Model.PollAnswers.Any())
+                                    {
+                                        <tr>
+                                            <td colspan="4" style="text-align:center">No polls to show</td>
+                                        </tr>
+                                    }
+                                    else
+                                    {
+                                        foreach (var item in Model.PollAnswers)
+                                        {
+                                            <tr>
+                                                <td> @(rowNo += 1)</td>
+                                                <td>
+                                                    @item.Text
+                                                </td>
+                                                <td>
+                                                    @item.Counter
+                                                </td>
+                                                <td>
+                                                    <form asp-action="Delete" asp-controller="PollAnswers" asp-route-id="@item.Id" method="post">
+                                                        <button type="submit" name="delete-PollAnswer" class="btn btn-sm btn-danger"><i class="fa fa-trash-o "></i></button>
+
+                                                    </form>
+                                                </td>
+                                            </tr>
+                                        }
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+
+
+@* Delete modal *@
+<div id="confirm" class="modal hide fade">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title text-danger">Delete answer</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <input id="baseDeleteUrl" type="hidden" value="@Url.Action("Delete", "PollAnswers")" />
+            <div class="modal-body">
+                <p class="text-danger">Do you really want to delete this answer?</p>
+            </div>
+            <div class="modal-footer">
+                <a id="delete" name="delete" style="color:white;" class="btn btn-danger">Delete</a>
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+    <script>
+        $('button[name="delete-PollAnswer"]').on('click', function (e) {
+            var $form = $(this).closest('form');
+            e.preventDefault();
+            $('#confirm').modal({
+                backdrop: 'static',
+                keyboard: false
+            })
+                .on('click', '#delete', function (e) {
+                    $form.trigger('submit');
+                });
+        });
+
+                        $('input[type=text], input[type=password], input[type=email], input[type=tel], select, textarea').each(function () {
+                        var req = $(this).attr('data-val-required');
+                        if (undefined != req) {
+                            var label = $('label[for="' + $(this).attr('name') + '"]');
+                            if (label.length == 0) {
+                                label = $(this).parent().parent().children("label");
+                            }
+                            var text = label.text();
+                            if (text.length > 0) {
+                                if (!text.includes("*")) {
+                                    label.append('<span>*</span>');
+                                }
+                            }
+                        }
+                    });
+
+
+    </script>
+}

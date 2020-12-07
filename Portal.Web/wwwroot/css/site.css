@@ -1,0 +1,217 @@
+﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
+for details on configuring this project to bundle and minify static web assets. */
+
+* {
+    box-sizing: border-box;
+}
+
+a.navbar-brand {
+  white-space: normal;
+  text-align: center;
+  word-break: break-all;
+}
+
+/* Provide sufficient contrast against white background */
+a {
+  color: #0366d6;
+}
+
+.btn-primary {
+  color: #fff;
+  background-color: #1b6ec2;
+  border-color: #1861ac;
+}
+
+.nav-pills .nav-link.active, .nav-pills .show > .nav-link {
+  color: #fff;
+  background-color: #1b6ec2;
+  border-color: #1861ac;
+}
+
+/* Sticky footer styles
+-------------------------------------------------- */
+html {
+  font-size: 14px;
+}
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+.border-top {
+  border-top: 1px solid #e5e5e5;
+}
+.border-bottom {
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.box-shadow {
+  box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
+}
+
+button.accept-policy {
+  font-size: 1rem;
+  line-height: inherit;
+}
+
+/* Sticky footer styles
+-------------------------------------------------- */
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+    /* Margin bottom by footer height */
+    margin-bottom: 60px;
+  
+}
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  white-space: nowrap;
+  line-height: 60px; /* Vertically center the text there */
+}
+.no-link {
+    color: inherit !important;
+    text-decoration: none !important;
+}
+.active-order {
+    color: #2FA4E7 !important;
+}
+/*=========================================HOME PAGE====================================================*/
+
+
+/* Prevent image stretching is it's resized */
+.card-img-top {
+    object-fit: cover;
+}
+
+/* Make all cards in row the same height */
+.row {
+   display: flex;
+   flex-wrap: wrap;
+}
+
+.row > div[class*='col-'] {
+  display: flex;
+}
+
+/* Hover effects */
+.card {
+  transition: -webkit-transform 0.3s ease;
+}
+.card:hover {
+  transform: scale(1.01, 1.01);
+}
+
+/* Responsive design for image heights */
+@media (min-width: 576px) {
+  .card-img-top {
+    height: 50vw;
+  }
+}
+
+@media (min-width: 768px) {
+  .card-img-top {
+    height: 30vw;
+  }
+}
+
+@media (min-width: 992px) {
+  .card-img-top {
+    height: 50vw;
+  }
+}
+
+@media (min-width: 1200px) {
+  .card-img-top {
+    height: 20vw;
+  }
+}
+* {
+    box-sizing: border-box
+}
+/*--------------------------------details-------------------------*/
+.content-container {
+    padding: 20px;
+    margin-top: 20px;
+    text-align: justify;
+    white-space: pre-line;
+    /*border-right: 2px solid #7d7d7d;*/
+}
+
+
+.jsn-article-info i {
+    font-size: 15px;
+    margin-right: 6px;
+    position: absolute;
+    top: 0;
+    color: #555;
+}
+
+jsn-article-info {
+    align-content: center;
+   
+}
+.page-wrapper {
+    align-content: center;
+    /*background-image: url('../images/white-background-with-blue-tech-hexagon_1017-19366.jpg');
+    background-repeat: no-repeat;
+    background-size: 100%;*/
+}
+form.search input[type=text] {
+    padding: 10px;
+    font-size: 17px;
+    border: 1px solid grey;
+    float: left;
+    width: 80%;
+    background: #f1f1f1;
+}
+
+form.search button {
+    float: left;
+    width: 20%;
+    padding: 10px;
+    background: #2196F3;
+    color: white;
+    font-size: 17px;
+    border: 1px solid grey;
+    border-left: none;
+    cursor: pointer;
+}
+
+    form.search button:hover {
+        background: #0b7dda;
+    }
+
+form.search::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+#SearchArticleTitle h5{
+    margin: 30px 5px 20px;
+}
+#SearchArticleTitle a:hover {
+    text-decoration:none;
+}
+#SearchArticleTitle h5:hover {
+    color: #2196f3;
+}
+.article:hover {
+    background-color:whitesmoke;
+}
+.article {
+  
+    border-bottom: 1px solid lightgrey;
+}
+
+.center {
+    margin: auto;
+    /*width: 60%;
+    border: 5px solid #FFFF00;
+    padding: 10px;*/
+}

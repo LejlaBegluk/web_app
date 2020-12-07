@@ -1,0 +1,103 @@
+﻿@model Portal.Data.ViewModels.Article.ArticleViewModel
+@{
+    ViewData["Title"] = "Details";
+}
+    <div class="col-md-12 col-sm-12">
+        <div class="page-wrapper">
+            <div class="slider-area">
+                <h1 style="text-align: center;margin: 30px auto;font-weight: bold;">@Model.Title</h1>
+
+                <div class="wrapper">
+
+                    @if (Model.PhotoList.Count != 0)
+                    {
+                        @foreach (var item in Model.PhotoList)
+                        {
+                            <div>
+                                <img src="@item.Url" style="width: 630px; height: 420px; margin-left: auto; margin-right: auto;">
+                            </div>
+                        }
+
+                    }
+                </div>
+            </div>
+            <div class="col-md-12 col-sm-12">
+                <div class="content-container"  >
+                    <div class="jsn-article-info" style="margin-left:20px">
+                        <!-- Item Author -->
+                        <span class="glyphicon glyphicon-pencil"></span> <span class="itemAuthor" style="font-style: italic; font-weight:bold"> Autor: @Model.Journalist.Employee.FirstName</span> <span class="glyphicon glyphicon-time"></span><span class="itemDateCreated" style="font-weight:bold;">  @Model.CreateOn.ToShortDateString()</span> <a href="javascript:LikeClick('@Model.Id')" id="Like"><span class="fa fa-heart-o" id="LikeIcon" style="font-weight:bold;"></span></a> <span id="LikeLabel" style="font-style: italic; font-weight:bold">@Model.Likes</span>
+                    </div>
+                    <div class="col-md-12 col-sm-12">
+                        <p style="white-space: pre-line; border-right: 1px solid #dee2e6;border-left: 1px solid #dee2e6; padding:5px;" id="Content">@Model.Content</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12 col-sm-12" style="margin-bottom:10px">
+            <div class="col-md-12 col-sm-12">
+
+                <div class="col-md-12 col-sm-12" >
+                    <partial name="_CommentList" model="@Model.Comment" />
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.min.js"></script>
+
+    @section Scripts {
+
+        <script>
+            var LikeClick = function (id) {
+                var c = $("#LikeIcon").hasClass('fa fa-heart');
+                if (!c) {
+                    jQuery.ajax(
+                        {
+                            url: '/Articles/Like',
+                            type: "GET",
+                            dataType: "JSON",
+                            data: {
+                                id: id
+                            },
+                            success: function (data) {
+                                var num = parseInt($("#LikeLabel").text());
+                                console.log(num)
+
+                                $("#LikeLabel").text(num + 1);
+                                $("#LikeIcon").removeClass('fa fa-heart-o');
+                                $("#LikeIcon").addClass('fa fa-heart');
+                                //  $("#Like").prop("href", "")
+                                $("#Like").off('click');
+                                //$("#LikeIcon").prop("disabled", "true")
+
+                            }
+                        });
+                }
+
+
+            };
+            function mySlick() {
+                $(".wrapper").not(".slick-initialized").slick({
+                    centerMode: false,
+                    autoplay: true,
+                    dots: true,
+                    slidesToShow: 1,
+                    adaptiveHeight: true,
+                    responsive: [{
+                        breakpoint: 768,
+                        settings: {
+                            dots: false,
+                            arrows: false,
+                            infinite: false,
+                            slidesToShow: 1,
+                            slidesToScroll: 1,
+
+                        }
+                    }]
+                });
+            }
+            mySlick();
+        </script>
+
+    }

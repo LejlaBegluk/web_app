@@ -1,0 +1,36 @@
+﻿@using Portal.Data.ViewModels
+@model EditRoleViewModel
+
+<div class="col-md-6 offset-md-3">
+
+    <form asp-controller="Admin" asp-action="EditRole" method="post" role="form">
+
+        <div asp-validation-summary="All" class="text-danger"></div>
+        <div class="form-group">
+            <label asp-for="RoleName" class="control-label"></label>
+
+            <input asp-for="RoleName" class="form-control" />
+            <span asp-validation-for="RoleName" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <input type="submit" class="btn btn-primary" value="Save role" />
+            <a asp-action="RoleManagement" class="btn btn-primary">Cancel</a>
+            <a asp-action="AddUserToRole" asp-route-roleId="@Model.Id" class="btn btn-primary">Add users to role</a>
+            <a asp-action="DeleteUserFromRole" asp-route-roleId="@Model.Id" class="btn btn-primary">Remove users from role</a>
+        </div>
+    </form>
+
+    <h3>Users in this role</h3>
+    <ul class="list-group list-group-flush overflow-auto" style="height:300px;">
+        @foreach (var user in Model.Users)
+        {
+            <li class="list-group-item list-group-item-info">
+                @user.Text
+            </li>
+        }
+    </ul>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

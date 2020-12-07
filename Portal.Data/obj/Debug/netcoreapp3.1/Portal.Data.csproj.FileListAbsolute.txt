@@ -1,0 +1,10 @@
+C:\Users\lejla.begluk\Source\Repos\webapp\web-app-mvc\Portal.Data\bin\Debug\netcoreapp3.1\Portal.Data.deps.json
+C:\Users\lejla.begluk\Source\Repos\webapp\web-app-mvc\Portal.Data\bin\Debug\netcoreapp3.1\Portal.Data.runtimeconfig.json
+C:\Users\lejla.begluk\Source\Repos\webapp\web-app-mvc\Portal.Data\bin\Debug\netcoreapp3.1\Portal.Data.runtimeconfig.dev.json
+C:\Users\lejla.begluk\Source\Repos\webapp\web-app-mvc\Portal.Data\bin\Debug\netcoreapp3.1\Portal.Data.dll
+C:\Users\lejla.begluk\Source\Repos\webapp\web-app-mvc\Portal.Data\bin\Debug\netcoreapp3.1\Portal.Data.pdb
+C:\Users\lejla.begluk\Source\Repos\webapp\web-app-mvc\Portal.Data\obj\Debug\netcoreapp3.1\Portal.Data.AssemblyInfoInputs.cache
+C:\Users\lejla.begluk\Source\Repos\webapp\web-app-mvc\Portal.Data\obj\Debug\netcoreapp3.1\Portal.Data.AssemblyInfo.cs
+C:\Users\lejla.begluk\Source\Repos\webapp\web-app-mvc\Portal.Data\obj\Debug\netcoreapp3.1\Portal.Data.dll
+C:\Users\lejla.begluk\Source\Repos\webapp\web-app-mvc\Portal.Data\obj\Debug\netcoreapp3.1\Portal.Data.pdb
+C:\Users\lejla.begluk\source\repos\webapp\web-app-mvc\Portal.Data\obj\Debug\netcoreapp3.1\Portal.Data.csprojAssemblyReference.cache

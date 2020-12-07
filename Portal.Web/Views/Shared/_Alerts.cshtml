@@ -1,0 +1,33 @@
+﻿@{
+    var type = (string)TempData["_alert.type"];
+    var title = (string)TempData["_alert.title"];
+    var body = (string)TempData["_alert.body"];
+}
+
+@if (!string.IsNullOrEmpty(type))
+{
+    <div class="alert alert-@type alert-dismissible row" role="alert" id="divAlert">
+        <div class="col-md-11">
+            <h3 style="color:black">@title <small style="color:black">@body</small></h3>
+        </div>
+        <div class="col-md-1 text-right">
+            <button class="btn btn-danger" id="btn-zatvori">
+                <i class="fa fa-times"></i>
+            </button>
+        </div>
+    </div>
+}
+
+<script>
+    $("#divAlert").fadeTo(10000, 500).slideUp(500,
+        function () {
+            $("#divAlert").slideUp(500);
+        });
+
+    $("#divAlert").find("#btn-zatvori").click(function (e) {
+        e.preventDefault();
+
+        $("#divAlert").hide();
+    });
+
+</script>

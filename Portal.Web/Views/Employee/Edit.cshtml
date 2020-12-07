@@ -1,0 +1,171 @@
+﻿@model Portal.Data.ViewModels.EditEmployeeViewModel
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+
+<div class="row">
+    <div class="col-md-6 offset-md-3 p-4 shadow-lg  mb-5 bg-white rounded">
+        <form id="user-edit" asp-action="Edit" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                @if (Model.Photo == null)
+                {
+                    <img id="preview-img" src="~/Images/user.png" style="max-width:200px; max-height:200px;" class="rounded mx-auto d-block" alt="...">
+                }
+                else
+                {
+                    <img id="preview-img" src="@Model.Photo.Url" style="max-width:200px; max-height:200px;" class="rounded mx-auto d-block" alt="...">
+                }
+
+            </div>
+            <div class="form-group">
+                <div class="custom-file">
+                    <label id="photo-lbl" asp-for="Image" class="custom-file-label"></label>
+                    <input asp-for="Image" type="file" class="custom-file-input" />
+                </div>
+                <span asp-validation-for="Image" class="text-danger"></span>
+            </div>
+            <div class="form-row">
+                @if (User.IsInRole("Administrator"))
+                {
+
+                    <div class="form-group  col-md-6">
+                        <label asp-for="EmployeeType" class="control-label"></label>
+                        <select asp-for="EmployeeType" value="EmployeeType" class="custom-select" asp-items="new SelectList(Model.EmployeeTypes,Model.EmployeeType)">
+                            <option value="">-Select value-</option>
+                        </select>
+                        <span asp-validation-for="EmployeeType" class="text-danger"></span>
+                    </div>
+                    <div class="form-group  col-md-6">
+                        <label asp-for="EditorId" class="control-label"></label>
+                        <select asp-for="EditorId" class="custom-select" asp-items="@(new SelectList(Model.Editors,"Id", "UserName",Model.Editors.FirstOrDefault(e => e.Id.Equals(Model.EditorId))))">
+                            <option value="">-Select value-</option>
+                        </select>
+                        <span asp-validation-for="EditorId" class="text-danger"></span>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label asp-for="StartOfEmployment" class="control-label"></label>
+                        <input asp-for="StartOfEmployment" class="form-control" />
+                        <span asp-validation-for="StartOfEmployment" class="text-danger"></span>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label asp-for="EndOfEmployment" class="control-label"></label>
+                        <input asp-for="EndOfEmployment" class="form-control" />
+                        <span asp-validation-for="EndOfEmployment" class="text-danger"></span>
+                    </div>
+                }
+                else
+                {
+                    <input type="hidden" asp-for="EmployeeType" />
+                    <input type="hidden" asp-for="EditorId" />
+                    <input type="hidden" asp-for="StartOfEmployment" />
+                    <input type="hidden" asp-for="EndOfEmployment" />
+                }
+
+
+
+                <div class="form-group  col-md-6">
+                    <label asp-for="UserName" class="control-label"></label>
+                    <input asp-for="UserName" class="form-control" />
+                    <span asp-validation-for="UserName" class="text-danger"></span>
+                </div>
+
+                <div class="form-group  col-md-6">
+                    <label asp-for="Email" class="control-label"></label>
+                    <input asp-for="Email" class="form-control" />
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+                <div class="form-group  col-md-6">
+                    <label asp-for="FirstName" class="control-label"></label>
+                    <input asp-for="FirstName" class="form-control" />
+                    <span asp-validation-for="FirstName" class="text-danger"></span>
+                </div>
+                <div class="form-group  col-md-6">
+                    <label asp-for="LastName" class="control-label"></label>
+                    <input asp-for="LastName" class="form-control" />
+                    <span asp-validation-for="LastName" class="text-danger"></span>
+                </div>
+
+                <div class="form-group  col-md-6">
+                    <label asp-for="PhoneNumber" class="control-label"></label>
+                    <input asp-for="PhoneNumber" class="form-control" />
+                    <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+                </div>
+                <div class="form-group col-md-6">
+                    <label asp-for="SocialSecurityNumber" class="control-label"></label>
+                    <input asp-for="SocialSecurityNumber" class="form-control" />
+                    <span asp-validation-for="SocialSecurityNumber" class="text-danger"></span>
+                </div>
+                <div class="form-group col-md-6">
+                    <label asp-for="Address" class="control-label"></label>
+                    <input asp-for="Address" class="form-control" />
+                    <span asp-validation-for="Address" class="text-danger"></span>
+                </div>
+                <div class="form-group col-md-6">
+                    <label asp-for="CountryId" class="control-label"></label>
+                    <select asp-for="CountryId" class="custom-select" asp-items="@(new SelectList(Model.Countries,"Id", "Name"))">
+                        <option value="">Select country</option>
+                    </select>
+                    <span asp-validation-for="CountryId" class="text-danger"></span>
+                </div>
+                <div class="form-group col-md-6">
+                    <label asp-for="Gender" class="control-label"></label>
+                    <select asp-for="Gender" class="custom-select" asp-items="@(new SelectList(Model.Genders))">
+                        <option value="">Select gender</option>
+                    </select>
+                    <span asp-validation-for="Gender" class="text-danger"></span>
+                </div>
+
+                <div class="form-group col-md-6">
+                    <label asp-for="BirthDate" class="control-label"></label>
+                    <input asp-for="BirthDate" class="form-control" />
+                    <span asp-validation-for="BirthDate" class="text-danger"></span>
+                </div>
+
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Update" class="btn btn-primary" />
+                <a asp-action="ForgotPassword" asp-controller="Account" class="btn btn-primary">Change Password</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script type="text/javascript">
+        $('input[type="file"]').change(function (e) {
+            var fileName = e.target.files[0].name;
+            $("#photo-lbl").text(fileName);
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                $('#preview-img').attr('src', e.target.result);
+            }
+            reader.readAsDataURL(this.files[0]);
+        });
+
+        $("#btn-save").click(function () {
+            var file = $('input[type=file]')[0].files[0];
+            if (file != null) {
+            var formData = new FormData();
+            formData.append('File', file);
+            $.ajax({
+                type: "POST",
+                enctype: "multipart/form-data",
+                url: "/UserPhoto/AddPhotoForPortalUser/@Model.Id",
+                data: formData,
+                contentType: false,
+                processData: false,
+                success: function () {
+                    window.location.href = '/Admin/EditUser/@Model.Id';
+                }
+            });
+        }
+        });
+
+    </script>
+}

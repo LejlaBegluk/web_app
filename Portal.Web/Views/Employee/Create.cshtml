@@ -1,0 +1,116 @@
+﻿@model Portal.Data.ViewModels.EmployeeViewModel
+
+@{
+    ViewData["Title"] = "Add new employee";
+}
+
+
+
+<h4 class="text-center">Add new employee</h4>
+
+<div class="row">
+
+    <div class="col-md-8 offset-md-2">
+
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-row">
+
+                <div class="form-group col-md-6">
+                    <label asp-for="UserName" class="control-label"></label>
+                    <input asp-for="UserName" class="form-control" />
+                    <span asp-validation-for="UserName" class="text-danger"></span>
+                </div>
+                <div class="form-group col-md-6">
+                    <label asp-for="Email" class="control-label"></label>
+                    <input asp-for="Email" class="form-control" />
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+                <div class="form-group col-md-6">
+                    <label asp-for="FirstName" class="control-label"></label>
+                    <input asp-for="FirstName" class="form-control" />
+                    <span asp-validation-for="FirstName" class="text-danger"></span>
+                </div>
+                <div class="form-group col-md-6">
+                    <label asp-for="LastName" class="control-label"></label>
+                    <input asp-for="LastName" class="form-control" />
+                    <span asp-validation-for="LastName" class="text-danger"></span>
+                </div>
+                <div class="form-group col-md-6">
+                    <label asp-for="SocialSecurityNumber" class="control-label"></label>
+                    <input asp-for="SocialSecurityNumber" class="form-control" />
+                    <span asp-validation-for="SocialSecurityNumber" class="text-danger"></span>
+                </div>
+                <div class="form-group col-md-6">
+                    <label asp-for="PhoneNumber" class="control-label"></label>
+                    <input asp-for="PhoneNumber" class="form-control" />
+                    <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+                </div>
+                <div class="form-group col-md-6">
+                    <label asp-for="Address" class="control-label"></label>
+                    <input asp-for="Address" class="form-control" />
+                    <span asp-validation-for="Address" class="text-danger"></span>
+                </div>
+                <div class="form-group col-md-6">
+                    <label asp-for="CountryId" class="control-label"></label>
+                    <select asp-for="CountryId" class="custom-select" asp-items="@(new SelectList(Model.Countries,"Id", "Name"))">
+                        <option value="">Select country</option>
+                    </select>
+                    <span asp-validation-for="CountryId" class="text-danger"></span>
+                </div>
+
+                <div class="form-group col-md-6">
+                    <label asp-for="EmployeeType" class="control-label"></label>
+                    <select asp-for="EmployeeType" class="custom-select" asp-items="new SelectList(Model.EmployeeTypes)">
+                        <option value="">Select employee type</option>
+                    </select>
+                    <span asp-validation-for="EmployeeType" class="text-danger"></span>
+                </div>
+                <div class="form-group col-md-6">
+                    <label asp-for="EditorId" class="control-label"></label>
+                    <select asp-for="EditorId" class="custom-select" asp-items="@(new SelectList(Model.Editors,"Id", "UserName"))">
+                        <option value="">Select editor</option>
+                    </select>
+                    <span asp-validation-for="EditorId" class="text-danger"></span>
+                </div>
+                <div class="form-group col-md-6">
+                    <label asp-for="Gender" class="control-label"></label>
+                    <select asp-for="Gender" class="custom-select" asp-items="@(new SelectList(Model.Genders))">
+                        <option value="">Select gender</option>
+                    </select>
+                    <span asp-validation-for="Gender" class="text-danger"></span>
+                </div>
+
+                <div class="form-group col-md-6">
+                    <label asp-for="BirthDate" class="control-label"></label>
+                    <input asp-for="BirthDate" class="form-control" />
+                    <span asp-validation-for="BirthDate" class="text-danger"></span>
+                </div>
+                <div class="form-group col-md-6">
+                    <label asp-for="StartOfEmployment" class="control-label"></label>
+                    <input asp-for="StartOfEmployment" class="form-control" />
+                    <span asp-validation-for="StartOfEmployment" class="text-danger"></span>
+                </div>
+                <div class="form-group col-md-6">
+                    <label asp-for="EndOfEmployment" class="control-label"></label>
+                    <input asp-for="EndOfEmployment" class="form-control" />
+                    <span asp-validation-for="EndOfEmployment" class="text-danger"></span>
+                </div>
+                <div class="form-group col-md-6">
+                    <label asp-for="Password" class="control-label"></label>
+                    <input asp-for="Password" class="form-control" />
+                    <span asp-validation-for="Password" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

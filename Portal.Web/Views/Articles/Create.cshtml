@@ -1,0 +1,92 @@
+﻿@model Portal.Data.ViewModels.Article.ArticleAddEditViewModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1 style="text-align:center">New article</h1>
+<hr />
+<div class="col-md-12 col-sm-12 col-xs-12">
+    <form asp-action="Create" enctype="multipart/form-data">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="col-md-9 col-md-6 p-4 shadow-lg  mb-5 bg-white rounded" style="margin-left:130px;">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Title, new { @class = "control-label col-md-4 col-sm-3" })
+                    @Html.TextBoxFor(model => model.Title, new { @class = "form-control", autocomplete = "off" })
+                    @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.CategoryId, new { @class = "control-label col-md-4 col-sm-3" })
+                    @Html.DropDownListFor(model => model.CategoryId, new SelectList(Model.Categories, "Id", "Name"), "-", new { @Class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.CategoryId, "", new { @class = "text-danger" })
+                </div>
+                @*<div class="form-group">*@
+                @Html.Label("Photos", "Photos", new { @class = "control-label col-md-4 col-sm-3" })
+                <div class="custom-file col-md-11 col-sm-11">
+                    <label id="photo-lbl" class="custom-file-label">No file selected</label>
+                    <input asp-for="Photos" type="file" class="custom-file-input" multiple accept=".gif,.jpg,.jpeg,.png" />
+
+                </div>
+                <div class="col-md-1 col-sm-3" style="float:right;">
+                    <button type="button" id="deleteFiles" class="btn btn-danger btn-xs">
+                        <i class="fa fa-trash-o"></i>
+                    </button>
+                </div>
+                <span asp-validation-for="Photos" class="text-danger"></span>
+
+                @*</div>*@
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Content, new { @class = "control-label col-md-4 col-sm-3" })
+                    @Html.TextAreaFor(model => model.Content, new { @class = "form-control", @cols = 50, @rows = 15, autocomplete = "off" })
+                    @Html.ValidationMessageFor(model => model.Content, "", new { @class = "text-danger" })
+                </div>
+                <div class="btn-group fa-pull-right">
+                    <button type="submit" id="submit" class="btn btn-primary">Submit</button>
+                    <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+
+                </div>
+            </div>
+        </div>
+    </form>
+</div> 
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script>
+        $(document).ready(function () {
+            $('input[type=text], input[type=password], input[type=email], input[type=tel], select, textarea').each(function () {
+                var req = $(this).attr('data-val-required');
+                if (undefined != req) {
+                    var label = $('label[for="' + $(this).attr('name') + '"]');
+                    if (label.length == 0) {
+                        label = $(this).parent().parent().children("label");
+                    }
+                    var text = label.text();
+                    if (text.length > 0) {
+                        if (!text.includes("*")) {
+                            label.append('<span>*</span>');
+                        }
+                    }
+                }
+            });
+
+            $('.custom-file-input').on("change", function () {
+                var files = $(this)[0].files;
+                if (files.length > 1) {
+                    $('#photo-lbl').html(files.length + ' files selected');
+                }
+                else if (files.length == 1) {
+                    $('#photo-lbl').html(files[0].name);
+
+                }
+            });
+            document.getElementById('deleteFiles').onclick = function () {
+                var file = document.getElementById("Photos");
+                file.value = file.defaultValue;
+                $('#photo-lbl').html("No file selected");
+            }
+        });
+
+
+    </script>
+}

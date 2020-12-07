@@ -1,0 +1,159 @@
+﻿@model Portal.Data.ViewModels.Article.ArticleAddEditViewModel
+
+@{
+    ViewData["Title"] = "Edit";
+}
+<h1 style="text-align:center">Edit article</h1>
+<hr />
+<form asp-action="Edit" enctype="multipart/form-data">
+    <div class="col-md-12 col-sm-12 col-xs-12">
+
+        @Html.HiddenFor(model => model.Id)
+        @Html.HiddenFor(model => model.UserId)
+        @Html.HiddenFor(model => model.CreateOn)
+        @*@Html.HiddenFor(model => model.MainPhoto)*@
+
+        @if (!Model.IsEditor)
+        {
+            @Html.HiddenFor(model => model.Active)
+        }
+        <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="col-md-9 col-md-6 p-4 shadow-lg  mb-5 bg-white rounded" style="margin-left:130px;">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Title, new { @class = "control-label col-md-4 col-sm-3" })
+                            @Html.TextBoxFor(model => model.Title, new { @class = "form-control", autocomplete = "off" })
+                            @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.CategoryId, new { @class = "control-label col-md-4 col-sm-3" })
+                            @Html.DropDownListFor(model => model.CategoryId, new SelectList(Model.Categories, "Id", "Name"), "-", new { @Class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.CategoryId, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Content, new { @class = "control-label col-md-4 col-sm-3" })
+                            @Html.TextAreaFor(model => model.Content, new { @class = "form-control", @cols = 50, @rows = 15, autocomplete = "off" })
+                            @Html.ValidationMessageFor(model => model.Content, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="row" style="margin-left:1px;">
+                            @foreach (var item in Model.PhotoList)
+                            {
+                                <div class="column">
+                                    <img src="@item.Url" alt="Error" width="100" height="100" style="margin:5px;" />
+                                    <br />
+                                    <a type="button" href="javascript:deletePhoto('@item.Id')" id="deleteFiles" style="display:block;  width: 40px;height: 40px; margin-left:10px" class="btn btn-danger btn-xs fa-pull-right">
+                                        <i class="fa fa-trash-o text-center"></i>
+                                    </a>
+                                    <br />
+                                </div>
+                            }
+                        </div>
+                        <div class="form-group">
+                            <div class="custom-file  col-md-11 col-sm-11">
+                                <label id="photo-lbl" class="custom-file-label">No file selected</label>
+                                <input asp-for="Photos" type="file" class="custom-file-input" multiple accept=".gif,.jpg,.jpeg,.png" />
+                            </div>
+                            <div class="col-md-1 col-sm-3" style="float:right;">
+                                <button type="button" id="deleteAllFiles" class="btn btn-danger btn-xs">
+                                    <i class="fa fa-trash-o"></i>
+                                </button>
+                            </div>
+                            <span asp-validation-for="Photos" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Active, new { @class = "control-label col-md-2 col-sm-3" })
+                            @if (Model.IsEditor)
+                            {
+                                @Html.CheckBoxFor(model => model.Active, new { @style = "width: 30px;height: 30px;" })
+                            }
+                            else
+                            {
+                                @Html.CheckBoxFor(model => model.Active, new { @disabled = "disabled", @style = "width: 30px;height: 30px;" })
+                            }
+
+                        </div>
+                        <div class="col-md-12">
+                            <div class="btn-group ">
+                                <button type="submit" class="btn btn-primary fa-pull-right">Submit</button>
+                                <a asp-action="Index" class="btn btn-secondary fa-pull-right">Cancel</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+</form>
+
+@* Delete modal *@
+<div id="confirm" class="modal hide fade">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title text-danger">Delete photo</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <input id="baseDeleteUrl" type="hidden" value="@Url.Action("DeleteArticlePhoto", "ArticlePhoto")" />
+            <div class="modal-body">
+                <p class="text-danger">Do you really want to delete this photo?</p>
+            </div>
+            <div class="modal-footer">
+                <a id="delete" name="delete" class="btn btn-danger">Delete</a>
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script>
+        $(document).ready(function () {
+                      $('input[type=text], input[type=password], input[type=email], input[type=tel], select, textarea').each(function () {
+        var req = $(this).attr('data-val-required');
+        if (undefined != req) {          
+            var label = $('label[for="' + $(this).attr('name') + '"]');
+            if (label.length == 0) {
+                label = $(this).parent().parent().children("label");
+            }           
+            var text = label.text();
+            if (text.length > 0) {
+                if (!text.includes("*")) {
+                    label.append('<span>*</span>');
+                }                
+            }
+        }
+     });
+
+            $('.custom-file-input').on("change", function () {
+                var files = $(this)[0].files;
+                if (files.length > 1) {
+                    $('#photo-lbl').html(files.length + ' files selected');
+                }
+                else if (files.length == 1) {
+                    $('#photo-lbl').html(files[0].name);
+
+                }
+            });
+            document.getElementById('deleteAllFiles').onclick = function () {
+                var file = document.getElementById("Photos");
+                file.value = file.defaultValue;
+                $('#photo-lbl').html("No file selected");
+            }
+
+        });
+
+          var deletePhoto = function (Id) {
+            console.log(Id)
+            $("#confirm").modal("show");
+
+            var baseDeleteUrl = $("#baseDeleteUrl").val();
+
+            var fullDeleteUrl = baseDeleteUrl + "?id=" + Id;
+
+            $("#delete").attr("href", fullDeleteUrl);
+           
+        }
+
+    </script>
+}

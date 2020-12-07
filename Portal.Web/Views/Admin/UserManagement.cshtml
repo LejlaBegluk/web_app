@@ -1,0 +1,457 @@
+﻿@using Microsoft.AspNetCore.Identity.EntityFrameworkCore
+@using Portal.Data.Helpers;
+@using Portal.Data.ViewModels;
+@using Wangkanai.Detection;
+@model UserManagemenViewModel
+@{
+    ViewData["Title"] = "User Management";
+}
+
+
+<h1 class="text-center">@ViewData["Title"]</h1>
+
+@if (!Model.Users.Any())
+{
+    <h1 class="text-center text-warning">There is no users</h1>
+}
+else
+{
+    if (Model.FromDevice.Type.Equals(DeviceType.Desktop))
+
+    {
+        <p>
+            <a class="btn btn-warning" asp-action="AddUser">New user</a>
+            <a class="btn btn-warning" asp-controller="Employee" asp-action="Create">New Employee</a>
+            <a class="btn btn-warning" asp-action="RoleManagement">Role Management</a>
+            <a class="btn btn-primary" asp-action="UserManagement"
+               asp-route-pageNumber="@Model.CurrentPage"
+               asp-route-pageSize="@Model.PageSize"
+               asp-route-filter="Users"
+               asp-route-search="@Model.Search"
+               asp-route-orderBy="@Model.OrderBy">
+                All Users
+            </a>
+            <a class="btn btn-primary" asp-action="UserManagement"
+               asp-route-pageNumber="1)"
+               asp-route-pageSize="@Model.PageSize"
+               asp-route-filter="Journalist"
+               asp-route-search="@Model.Search"
+               asp-route-orderBy="@Model.OrderBy">
+                Journalists
+            </a>
+            <a class="btn btn-primary" asp-action="UserManagement"
+               asp-route-pageNumber="1"
+               asp-route-pageSize="@Model.PageSize"
+               asp-route-filter="Administrator"
+               asp-route-search="@Model.Search"
+               asp-route-orderBy="@Model.OrderBy">
+                Administrators
+            </a>
+            <a class="btn btn-primary" asp-action="UserManagement"
+               asp-route-pageNumber="1"
+               asp-route-pageSize="@Model.PageSize"
+               asp-route-filter="Editor"
+               asp-route-search="@Model.Search"
+               asp-route-orderBy="@Model.OrderBy">
+                Editors
+            </a>
+
+        </p>
+
+        <div class="mb-2">
+            <form method="get" class="form-inline my-2 my-lg-0" asp-action="UserManagement"
+                  asp-route-pageNumber="@Model.CurrentPage"
+                  asp-route-pageSize="@Model.PageSize"
+                  asp-route-filter="@Model.Filter"
+                  asp-route-orderBy="@Model.OrderBy">
+
+                <input type="hidden" asp-for="@Model.CurrentPage" />
+                <input type="hidden" asp-for="@Model.PageSize" />
+                <input type="hidden" asp-for="@Model.Filter" />
+                <input type="hidden" asp-for="@Model.OrderBy" />
+
+                <input asp-for="@Model.Search" class="form-control mr-sm-2" type="text" placeholder="Search">
+                <button class="btn btn-primary my-2 my-sm-0" type="submit">Search</button>
+            </form>
+
+        </div>
+
+        <table class="table table-striped" header header-content="User Management">
+            <tr class="d-flex">
+                <th class=" col col-4 ">User ID</th>
+                <th class="col col-2 ">
+                    <a class="@("no-link " + (Model.OrderBy.Equals("UserName") || Model.OrderBy.Equals("UserName_Desc") ? "active-order" : ""))" asp-action="UserManagement"
+                       asp-route-pageNumber="@Model.CurrentPage"
+                       asp-route-pageSize="@Model.PageSize"
+                       asp-route-filter="@Model.Filter"
+                       asp-route-search="@Model.Search"
+                       asp-route-orderBy="@(Model.OrderBy.Equals("UserName") ? "UserName_Desc" : "UserName")">
+                        User name
+                    </a>
+                </th>
+                <th class="col col-3">
+                    <a class="@("no-link " + (Model.OrderBy.Equals("Email") || Model.OrderBy.Equals("Email_Desc") ? "active-order" : ""))" asp-action="UserManagement"
+                       asp-route-pageNumber="@Model.CurrentPage"
+                       asp-route-pageSize="@Model.PageSize"
+                       asp-route-filter="@Model.Filter"
+                       asp-route-search="@Model.Search"
+                       asp-route-orderBy="@(Model.OrderBy.Equals("Email") ? "Email_Desc" : "Email")">
+                        Email
+                    </a>
+
+                </th>
+                <th class="col col-1">Active</th>
+                <th class="col col-2">Actions</th>
+            </tr>
+
+            @foreach (var user in Model.Users)
+            {
+                <tr class="d-flex">
+                    <td class="col-4">@user.Id</td>
+                    <td class="col-2">@user.UserName</td>
+                    <td class="col-3">@user.Email</td>
+                    <td class="col-1">
+                        @if (user.IsActive)
+                        {<i class="text-success fa fa-check-square"></i> }
+                        else
+                        {<i class="text-danger fa fa-square"></i>}
+                    </td>
+                    <td class="col-2">
+                        <form asp-action="DeleteUser" asp-route-id="@user.Id" method="post">
+                            <a class="btn btn-sm btn-warning" asp-action="EditUser" asp-route-id="@user.Id"><i class="fa fa-pencil"></i></a>
+                            <button type="submit" name="delete-user" class="btn btn-sm btn-danger">
+                                <i class="fa fa-trash-o"></i>
+                            </button>
+                        </form>
+                    </td>
+                </tr>
+            }
+        </table>
+    }
+    if (Model.FromDevice.Type.Equals(DeviceType.Mobile))
+    {
+        <div>
+            <p>
+                <a class="btn btn-warning" asp-action="AddUser">New user</a>
+                <a class="btn btn-warning" asp-controller="Employee" asp-action="Create">New Employee</a>
+                <a class="btn btn-warning" asp-action="RoleManagement">Role Management</a>
+            </p>
+            <p>
+                <a class="btn btn-primary" asp-action="UserManagement"
+                   asp-route-pageNumber="@Model.CurrentPage"
+                   asp-route-pageSize="@Model.PageSize"
+                   asp-route-filter="Users"
+                   asp-route-search="@Model.Search"
+                   asp-route-orderBy="@Model.OrderBy">
+                    All
+                </a>
+                <a class="btn btn-primary" asp-action="UserManagement"
+                   asp-route-pageNumber="1)"
+                   asp-route-pageSize="@Model.PageSize"
+                   asp-route-filter="Journalist"
+                   asp-route-search="@Model.Search"
+                   asp-route-orderBy="@Model.OrderBy">
+                    Journalists
+                </a>
+                <a class="btn btn-primary" asp-action="UserManagement"
+                   asp-route-pageNumber="1"
+                   asp-route-pageSize="@Model.PageSize"
+                   asp-route-filter="Administrator"
+                   asp-route-search="@Model.Search"
+                   asp-route-orderBy="@Model.OrderBy">
+                    Admins
+                </a>
+                <a class="btn btn-primary" asp-action="UserManagement"
+                   asp-route-pageNumber="1"
+                   asp-route-pageSize="@Model.PageSize"
+                   asp-route-filter="Editor"
+                   asp-route-search="@Model.Search"
+                   asp-route-orderBy="@Model.OrderBy">
+                    Editors
+                </a>
+
+            </p>
+
+
+            <div class="mb-2">
+                <form method="get" class="form-inline my-2 my-lg-0" asp-action="UserManagement"
+                      asp-route-pageNumber="@Model.CurrentPage"
+                      asp-route-pageSize="@Model.PageSize"
+                      asp-route-filter="@Model.Filter"
+                      asp-route-orderBy="@Model.OrderBy">
+
+                    <input type="hidden" asp-for="@Model.CurrentPage" />
+                    <input type="hidden" asp-for="@Model.PageSize" />
+                    <input type="hidden" asp-for="@Model.Filter" />
+                    <input type="hidden" asp-for="@Model.OrderBy" />
+                    <div class="input-group mb-3">
+                        <input asp-for="@Model.Search" type="text" class="form-control" placeholder="Search" aria-label="search" aria-describedby="button-addon2">
+                        <div class="input-group-append">
+                            <button class="btn btn-primary" type="submit" id="button-addon2">Search</button>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+
+        @foreach (var user in Model.Users)
+        {
+            <div class="card border-info bg-light mb-3">
+                <h3 class="card-header text-center">@user.UserName</h3>
+                <ul class="list-group list-group-flush">
+                    @if (user.Url != null)
+                    {
+                        <li class="list-group-item">
+                            <img style="max-width:300px; max-height:100%;" display: block;" src="@user.Url" alt="Card image">
+                        </li>
+                    }
+                    else
+                    {
+
+                        <li class="list-group-item">
+                            <img style="max-width:300px; max-height:100%;" display: block;" src="~/Images/user.png" alt="Image missing">
+                        </li>
+                    }
+                    <li class="list-group-item text-danger">@user.Id</li>
+
+                    <li class="list-group-item">@user.Email</li>
+                    @if (user.FirstName != null)
+                    {
+                        <li class="list-group-item">@user.FirstName</li>
+                    }
+                    @if (user.LastName != null)
+                    {
+                        <li class="list-group-item">@user.LastName</li>
+                    }
+                    <li class="list-group-item text-warning">@(user.IsActive ? "User is active" : "User is not active")</li>
+                </ul>
+                <div class="card-body">
+                    <form asp-action="DeleteUser" asp-route-id="@user.Id" method="post">
+                        <a class="btn btn-sm btn-warning" asp-action="EditUser" asp-route-id="@user.Id"><i class="fa fa-pencil"></i></a>
+                        <button type="submit" name="delete-user" class="btn btn-sm btn-danger">
+                            <i class="fa fa-trash-o"></i>
+                        </button>
+                    </form>
+                </div>
+
+            </div>
+        }
+
+    }
+    if (Model.FromDevice.Type.Equals(DeviceType.Tablet))
+    {
+        <div class="">
+
+            <p class="d-flex justify-content-center">
+                <a class="btn btn-warning" asp-action="AddUser">New user</a>
+                <a class="btn btn-warning mx-3" asp-controller="Employee" asp-action="Create">New Employee</a>
+                <a class="btn btn-warning" asp-action="RoleManagement">Role Management</a>
+            </p>
+            <p class="d-flex justify-content-center">
+                <a class="btn btn-primary mx-2" asp-action="UserManagement"
+                   asp-route-pageNumber="@Model.CurrentPage"
+                   asp-route-pageSize="@Model.PageSize"
+                   asp-route-filter="Users"
+                   asp-route-search="@Model.Search"
+                   asp-route-orderBy="@Model.OrderBy">
+                    All
+                </a>
+                <a class="btn btn-primary mx-2" asp-action="UserManagement"
+                   asp-route-pageNumber="1)"
+                   asp-route-pageSize="@Model.PageSize"
+                   asp-route-filter="Journalist"
+                   asp-route-search="@Model.Search"
+                   asp-route-orderBy="@Model.OrderBy">
+                    Journalists
+                </a>
+                <a class="btn btn-primary mx-2" asp-action="UserManagement"
+                   asp-route-pageNumber="1"
+                   asp-route-pageSize="@Model.PageSize"
+                   asp-route-filter="Administrator"
+                   asp-route-search="@Model.Search"
+                   asp-route-orderBy="@Model.OrderBy">
+                    Admins
+                </a>
+                <a class="btn btn-primary mx-2" asp-action="UserManagement"
+                   asp-route-pageNumber="1"
+                   asp-route-pageSize="@Model.PageSize"
+                   asp-route-filter="Editor"
+                   asp-route-search="@Model.Search"
+                   asp-route-orderBy="@Model.OrderBy">
+                    Editors
+                </a>
+
+            </p>
+
+
+            <div class="mb-2  d-flex justify-content-center">
+                <form method="get" class="form-inline my-2 my-lg-0" asp-action="UserManagement"
+                      asp-route-pageNumber="@Model.CurrentPage"
+                      asp-route-pageSize="@Model.PageSize"
+                      asp-route-filter="@Model.Filter"
+                      asp-route-orderBy="@Model.OrderBy">
+
+                    <input type="hidden" asp-for="@Model.CurrentPage" />
+                    <input type="hidden" asp-for="@Model.PageSize" />
+                    <input type="hidden" asp-for="@Model.Filter" />
+                    <input type="hidden" asp-for="@Model.OrderBy" />
+                    <div class="input-group mb-3">
+                        <input asp-for="@Model.Search" type="text" class="form-control" placeholder="Search" aria-label="search" aria-describedby="button-addon2">
+                        <div class="input-group-append">
+                            <button class="btn btn-primary" type="submit" id="button-addon2">Search</button>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+        <div class="row">
+            @foreach (var user in Model.Users)
+            {
+
+                <div class=" card border-info bg-light my-3 mx-auto " style="max-width:400px;">
+                    <h3 class="card-header text-center">@user.UserName</h3>
+                    @if (user.Url != null)
+                    {
+
+                        <img style="max-width:100%; max-height:75%;" src="@user.Url" alt="Card image">
+
+                    }
+                    else
+                    {
+
+
+                        <img style="max-width:100%; max-height:75%; display: block;" src="~/Images/user.png" alt="Image missing">
+
+                    }
+                    <ul class="list-group list-group-flush">
+
+                        <li class="list-group-item text-danger">@user.Id</li>
+
+                        <li class="list-group-item">@user.Email</li>
+                        @if (user.FirstName != null)
+                        {
+                            <li class="list-group-item">@user.FirstName</li>
+                        }
+                        @if (user.LastName != null)
+                        {
+                            <li class="list-group-item">@user.LastName</li>
+                        }
+                        <li class="list-group-item text-warning">@(user.IsActive ? "User is active" : "User is not active")</li>
+                    </ul>
+                    <div class="card-body">
+                        <form asp-action="DeleteUser" asp-route-id="@user.Id" method="post">
+                            <a class="btn btn-sm btn-warning" asp-action="EditUser" asp-route-id="@user.Id"><i class="fa fa-pencil"></i></a>
+                            <button type="submit" name="delete-user" class="btn btn-sm btn-danger">
+                                <i class="fa fa-trash-o"></i>
+                            </button>
+                        </form>
+                    </div>
+
+                </div>
+            }
+        </div>
+    }
+    <div class="d-flex justify-content-center">
+        <ul class="pagination">
+            <li class="page-item @(!Model.Users.ShowFirst? "disabled":"")">
+
+                <a class="page-link" asp-action="UserManagement"
+                   asp-route-pageNumber="@(1)"
+                   asp-route-pageSize="@Model.PageSize"
+                   asp-route-filter="@Model.Filter"
+                   asp-route-search="@Model.Search"
+                   asp-route-orderBy="@Model.OrderBy">
+                    <i class="text-primary fa fa-angle-double-left"></i>
+                </a>
+
+            </li>
+            @if (Model.Users.ShowPrevious)
+            {
+                <li class="page-item" title="Previous">
+                    <a class="page-link" asp-action="UserManagement"
+                       asp-route-pageNumber="@(Model.CurrentPage -1)"
+                       asp-route-pageSize="@Model.PageSize"
+                       asp-route-filter="@Model.Filter"
+                       asp-route-search="@Model.Search"
+                       asp-route-orderBy="@Model.OrderBy">
+                        @(Model.Users.CurrentPage - 1)
+                    </a>
+                </li>
+            }
+
+            <li class="page-item active" title="Current">
+                <a class="page-link">
+                    @(Model.Users.CurrentPage)
+                </a>
+            </li>
+            @if (Model.Users.ShowNext)
+            {
+                <li class="page-item  @(!Model.Users.ShowNext? "disabled":"")" title="Next">
+                    <a class="page-link" asp-action="UserManagement"
+                       asp-route-pageNumber="@(Model.CurrentPage + 1)"
+                       asp-route-pageSize="@Model.PageSize"
+                       asp-route-filter="@Model.Filter"
+                       asp-route-search="@Model.Search"
+                       asp-route-orderBy="@Model.OrderBy">
+                        @(Model.Users.CurrentPage + 1)
+                    </a>
+                </li>
+            }
+            <li class="page-item  @(!Model.Users.ShowLast? "disabled":"")" title="Last">
+                <a class="page-link" asp-action="UserManagement"
+                   asp-route-pageNumber="@(Model.Users.TotalPages)"
+                   asp-route-pageSize="@Model.PageSize"
+                   asp-route-filter="@Model.Filter"
+                   asp-route-search="@Model.Search"
+                   asp-route-orderBy="@Model.OrderBy">
+                    <i class=" text-primary fa fa-angle-double-right"></i>
+                </a>
+
+            </li>
+
+        </ul>
+        <p class="mx-4 text-dark">@Model.Users.PageSize of @Model.Users.TotalCount</p>
+    </div>
+
+}
+
+<div id="confirm" class="modal hide fade">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title text-danger">Delete user</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p class="text-danger">Do you really want to delete this user?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="delete" class="btn btn-danger">Delete</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts{
+
+    <script type="text/javascript">
+        $('button[name="delete-user"]').on('click', function (e) {
+            var $form = $(this).closest('form');
+            e.preventDefault();
+            $('#confirm').modal({
+                backdrop: 'static',
+                keyboard: false
+            })
+                .on('click', '#delete', function (e) {
+                    $form.trigger('submit');
+                });
+        });
+
+    </script>
+}
+
+

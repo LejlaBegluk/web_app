@@ -1,0 +1,13 @@
+C:\Users\lejla.begluk\Source\Repos\webapp\web-app-mvc\Portal.Persistance\bin\Debug\netcoreapp3.1\Portal.Persistance.deps.json
+C:\Users\lejla.begluk\Source\Repos\webapp\web-app-mvc\Portal.Persistance\bin\Debug\netcoreapp3.1\Portal.Persistance.dll
+C:\Users\lejla.begluk\Source\Repos\webapp\web-app-mvc\Portal.Persistance\bin\Debug\netcoreapp3.1\Portal.Persistance.pdb
+C:\Users\lejla.begluk\Source\Repos\webapp\web-app-mvc\Portal.Persistance\bin\Debug\netcoreapp3.1\Portal.Data.dll
+C:\Users\lejla.begluk\Source\Repos\webapp\web-app-mvc\Portal.Persistance\bin\Debug\netcoreapp3.1\Portal.Data.pdb
+C:\Users\lejla.begluk\Source\Repos\webapp\web-app-mvc\Portal.Persistance\obj\Debug\netcoreapp3.1\Portal.Persistance.csprojAssemblyReference.cache
+C:\Users\lejla.begluk\Source\Repos\webapp\web-app-mvc\Portal.Persistance\obj\Debug\netcoreapp3.1\Portal.Persistance.AssemblyInfoInputs.cache
+C:\Users\lejla.begluk\Source\Repos\webapp\web-app-mvc\Portal.Persistance\obj\Debug\netcoreapp3.1\Portal.Persistance.AssemblyInfo.cs
+C:\Users\lejla.begluk\Source\Repos\webapp\web-app-mvc\Portal.Persistance\obj\Debug\netcoreapp3.1\Portal.Persistance.csproj.CopyComplete
+C:\Users\lejla.begluk\Source\Repos\webapp\web-app-mvc\Portal.Persistance\obj\Debug\netcoreapp3.1\Portal.Persistance.dll
+C:\Users\lejla.begluk\Source\Repos\webapp\web-app-mvc\Portal.Persistance\obj\Debug\netcoreapp3.1\Portal.Persistance.pdb
+C:\Users\lejla.begluk\source\repos\webapp\web-app-mvc\Portal.Persistance\bin\Debug\netcoreapp3.1\Portal.Persistance.runtimeconfig.json
+C:\Users\lejla.begluk\source\repos\webapp\web-app-mvc\Portal.Persistance\bin\Debug\netcoreapp3.1\Portal.Persistance.runtimeconfig.dev.json

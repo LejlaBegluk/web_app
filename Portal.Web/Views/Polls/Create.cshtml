@@ -1,0 +1,66 @@
+﻿@model Portal.Data.ViewModels.Poll.PollViewModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+<h1 style="text-align:center">New Poll</h1>
+<hr />
+<br />
+<div class="col-md-12 col-sm-12 col-xs-12">
+    <div class="col-md-12">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="col-md-6 shadow-lg  mb-5 bg-white rounded" style="margin:auto;">
+                    <br /><br />
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Question, new { @class = "control-label col-md-2 col-sm-3" })
+                        <div class="col-md-8 col-sm-4">
+                            @Html.TextBoxFor(model => model.Question, new { @class = "form-control", autocomplete = "off" })
+                            @Html.ValidationMessageFor(model => model.Question, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Active, new { @class = "control-label col-md-4 col-sm-3" })
+                        @if (Model.IsEditor)
+                        {
+                            @Html.CheckBoxFor(model => model.Active, new { @style = "width: 30px;height: 30px;" })
+                        }
+                        else
+                        {
+                            @Html.CheckBoxFor(model => model.Active, new { @disabled = "disabled", @style = "width: 30px;height: 30px;" })
+                        }
+
+                    </div>
+                    <div class="button-group fa-pull-right" style="margin-left:15px;">
+                        <button type="submit" value="Create" class="btn btn-primary">Submit</button>
+                        <a type="button" asp-action="Index" class="btn btn-secondary">Cancel</a>
+
+                    </div>
+                    <br /><br />
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+    $('input[type=text], input[type=password], input[type=email], input[type=tel], select, textarea').each(function () {
+        var req = $(this).attr('data-val-required');
+        if (undefined != req) {
+            var label = $('label[for="' + $(this).attr('name') + '"]');
+            if (label.length == 0) {
+                label = $(this).parent().parent().children("label");
+            }
+            var text = label.text();
+            if (text.length > 0) {
+                if (!text.includes("*")) {
+                    label.append('<span>*</span>');
+                }
+            }
+        }
+    });
+</script>
+
+
+

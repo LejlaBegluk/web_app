@@ -1,0 +1,18 @@
+{
+  "version": "1.0",
+  "defaultProvider": "cdnjs",
+  "libraries": [
+    {
+      "library": "bootswatch@4.4.1",
+      "destination": "wwwroot/bootswatch/",
+      "files": [
+        "cerulean/bootstrap.min.css",
+        "cerulean/bootstrap.css"
+      ]
+    },
+    {
+      "library": "font-awesome@5.12.1",
+      "destination": "wwwroot/lib/font-awesome/"
+    }
+  ]
+}

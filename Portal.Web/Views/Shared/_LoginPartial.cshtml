@@ -1,0 +1,51 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using Portal.Data.Entities
+@using Portal.Persistance.Repositories.Interfaces
+@inject SignInManager<User> SignInManager
+@inject UserManager<User> UserManager
+@inject IUnitOfWork unitOfWork
+
+    <ul class="navbar-nav">
+        <a class="navbar-brand" asp-area="" asp-controller="Articles" asp-action="Search">
+            <i class="fa fa-search"></i>
+        </a>
+        @if (SignInManager.IsSignedIn(User))
+        {
+
+            var photo = unitOfWork.UserPhotos.GetAll().FirstOrDefault(p => p.UserId.ToString().Equals(UserManager.GetUserId(User)));
+
+            <li class="nav-item">
+                <a asp-controller="Admin" asp-action="DetailsUser" asp-route-id="@UserManager.GetUserId(User)" class="nav-link btn btn-link" title="Manage">
+                    <span class="mr-1">
+
+                        @if (photo != null)
+                        {
+                            <img src="@photo.Url" width="30" height="30" class="rounded-circle" alt="@photo.PublicId">
+                        }
+                        else
+                        {
+                            <img src="~/Images/user.png" width="30" height="30" class="rounded-circle" alt="Image missing.">
+                        }
+
+                    </span>
+
+
+                    @User.Identity.Name
+                </a>
+            </li>
+            <li class="nav-item">
+                <form class="form-inline" asp-area="" asp-controller="Account" asp-action="Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                    <button type="submit" class="nav-link btn btn-link ">Logout</button>
+                </form>
+            </li>
+        }
+        else
+        {
+            <li class="nav-item">
+                <a class="nav-link " id="registerLink" asp-controller="Account" asp-action="Register">Register</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="loginLink" asp-controller="Account" asp-action="Login">Login</a>
+            </li>
+        }
+    </ul>

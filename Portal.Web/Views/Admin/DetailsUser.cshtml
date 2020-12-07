@@ -1,0 +1,34 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using Portal.Data.Entities
+@using Portal.Persistance.Repositories.Interfaces
+@model Portal.Data.ViewModels.EditUserViewModel
+@inject UserManager<User> UserManager
+@inject IUnitOfWork unitOfWork
+@{
+    ViewData["Title"] = "DetailsUser";
+    var photo = unitOfWork.UserPhotos.GetAll().FirstOrDefault(p => p.UserId.Equals(UserManager.GetUserId(User)));
+}
+
+<div class="row ">
+    <div class="col-md-6 offset-md-3">
+        <div class="card shadow-lg p-3 mb-5 bg-white rounded">
+            @if (photo != null)
+            {
+                <img src="@Model.ProfilePhoto.Url" alt="John" style="width:100%">
+            }
+            else
+            {
+                <img src="~/Images/user.png" alt="John" style="width:100%">
+            }
+            <div class="p-3">
+                <h1>@Model.UserName</h1>
+                <h6 class="text-dark">
+                    <strong>Email: </strong> @Model.Email
+                </h6>
+                <p class="text-warning"> @(Model.IsActive ? "User is active" : "User is not active")</p>
+                <p><a class="btn btn-sm btn-warning" asp-action="EditUser" asp-route-id="@Model.Id">Edit</a></p>
+            </div>
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,83 @@
+﻿
+@using Microsoft.AspNetCore.Identity
+@using Portal.Data.Entities
+@using Portal.Persistance.Repositories.Interfaces
+@model Portal.Data.ViewModels.EditEmployeeViewModel
+@inject UserManager<User> UserManager
+@inject IUnitOfWork unitOfWork
+@{
+    ViewData["Title"] = "DetailsUser";
+    var photo = unitOfWork.UserPhotos.GetAll().FirstOrDefault(p => p.UserId.Equals(Model.Id));
+    var editor = "";
+    if (Model.EditorId != null)
+        editor = unitOfWork.Users.GetAll().FirstOrDefault(u => u.Id.Equals(Model.EditorId)).Email;
+}
+
+<div class="row ">
+    <div class="col-md-6 offset-md-3">
+        <div class="card shadow-lg p-3 mb-5 bg-white rounded">
+            @if (photo != null)
+            {
+                <img src="@Model.Photo.Url" alt="" style="width:100%">
+            }
+            else
+            {
+                <img src="~/Images/user.png" alt="" style="width:100%">
+            }
+            <div class="p-3">
+                <h1>@Model.UserName</h1>
+                <h6 class="text-dark">
+                    <strong>Email: </strong> @Model.Email
+                </h6>
+                <h6 class="text-dark">
+                    <strong>First Name: </strong> @Model.FirstName
+                </h6>
+                <h6 class="text-dark">
+                    <strong>Last Name: </strong> @Model.LastName
+                </h6>
+                <h6 class="text-dark">
+                    <strong>Phone Number: </strong> @Model.PhoneNumber
+                </h6>
+                <h6 class="text-dark">
+                    <strong>Social Security Number: </strong> @Model.SocialSecurityNumber
+                </h6>
+                <h6 class="text-dark">
+                    <strong>Gender: </strong> @Model.Gender
+                </h6>
+                <h6 class="text-dark">
+                    <strong>Birthdate: </strong> @Model.BirthDate.ToString("dd-MM-yyyy")
+                </h6>
+                <h6 class="text-dark">
+                    <strong>Start Of Employment: </strong> @Model.StartOfEmployment.ToString("dd-MM-yyyy")
+                </h6>
+                <h6 class="text-dark">
+                    <strong>End Of Employment: </strong> @Model.EndOfEmployment.ToString("dd-MM-yyyy")
+                </h6>
+                <h6 class="text-dark">
+                    <strong>Address: </strong> @Model.Address
+                </h6>
+                <h6 class="text-dark">
+                    <strong>Country: </strong> @Model.Country
+                </h6>
+                @if (Model.EditorId != null)
+                {
+                    <h6 class="text-dark">
+                        <strong>Editor: </strong> @editor
+                    </h6>}
+
+
+                <h6 class="text-dark">
+                    <strong>Roles: </strong>
+                    @foreach (var item in Model.EmployeeTypes)
+                    {
+                        @(item + " ")
+                    }
+                </h6>
+                <h6 class="text-warning"><strong>Status: </strong> @(Model.IsActive ? "User is active" : "User is not active")</h6>
+
+
+                <p><a class="btn btn-sm btn-warning" asp-controller="Admin" asp-action="EditUser" asp-route-id="@Model.Id">Edit</a></p>
+            </div>
+        </div>
+    </div>
+</div>

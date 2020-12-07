@@ -1,0 +1,27 @@
+﻿@using Portal.Data.ViewModels
+@model AddRoleViewModel
+<div class="col-md-6 offset-md-3">
+    <h2>Create a new role</h2>
+
+    <form asp-controller="Admin" asp-action="AddNewRole" method="post" class="form-horizontal" role="form">
+
+        <div asp-validation-summary="All" class="text-danger"></div>
+
+        <div class="form-group">
+            <label asp-for="RoleName" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="RoleName" class="form-control" />
+                <span asp-validation-for="RoleName" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" class="btn btn-primary" value="Create role" />
+            </div>
+        </div>
+    </form>
+</div>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

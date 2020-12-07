@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="dsEmployee" targetNamespace="http://tempuri.org/dsEmployee.xsd" xmlns:mstns="http://tempuri.org/dsEmployee.xsd" xmlns="http://tempuri.org/dsEmployee.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections />
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="dsEmployee" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="dsEmployee" msprop:Generator_UserDSName="dsEmployee">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="dtEmployee" msprop:Generator_TableClassName="dtEmployeeDataTable" msprop:Generator_TableVarName="tabledtEmployee" msprop:Generator_TablePropName="dtEmployee" msprop:Generator_RowDeletingName="dtEmployeeRowDeleting" msprop:Generator_RowChangingName="dtEmployeeRowChanging" msprop:Generator_RowEvHandlerName="dtEmployeeRowChangeEventHandler" msprop:Generator_RowDeletedName="dtEmployeeRowDeleted" msprop:Generator_UserTableName="dtEmployee" msprop:Generator_RowChangedName="dtEmployeeRowChanged" msprop:Generator_RowEvArgName="dtEmployeeRowChangeEvent" msprop:Generator_RowClassName="dtEmployeeRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Comments" msprop:Generator_ColumnVarNameInTable="columnComments" msprop:Generator_ColumnPropNameInRow="Comments" msprop:Generator_ColumnPropNameInTable="CommentsColumn" msprop:Generator_UserColumnName="Comments" type="xs:string" minOccurs="0" />
+              <xs:element name="Title" msprop:Generator_ColumnVarNameInTable="columnTitle" msprop:Generator_ColumnPropNameInRow="Title" msprop:Generator_ColumnPropNameInTable="TitleColumn" msprop:Generator_UserColumnName="Title" type="xs:string" minOccurs="0" />
+              <xs:element name="Likes" msprop:Generator_ColumnVarNameInTable="columnLikes" msprop:Generator_ColumnPropNameInRow="Likes" msprop:Generator_ColumnPropNameInTable="LikesColumn" msprop:Generator_UserColumnName="Likes" type="xs:string" minOccurs="0" />
+              <xs:element name="CreateOn" msprop:Generator_ColumnVarNameInTable="columnCreateOn" msprop:Generator_ColumnPropNameInRow="CreateOn" msprop:Generator_ColumnPropNameInTable="CreateOnColumn" msprop:Generator_UserColumnName="CreateOn" type="xs:string" minOccurs="0" />
+              <xs:element name="Category" msprop:Generator_ColumnVarNameInTable="columnCategory" msprop:Generator_ColumnPropNameInRow="Category" msprop:Generator_ColumnPropNameInTable="CategoryColumn" msprop:Generator_UserColumnName="Category" type="xs:string" minOccurs="0" />
+              <xs:element name="Journalist" msprop:Generator_ColumnVarNameInTable="columnJournalist" msprop:Generator_ColumnPropNameInRow="Journalist" msprop:Generator_ColumnPropNameInTable="JournalistColumn" msprop:Generator_UserColumnName="Journalist" type="xs:string" minOccurs="0" />
+              <xs:element name="Editor" msprop:Generator_ColumnVarNameInTable="columnEditor" msprop:Generator_ColumnPropNameInRow="Editor" msprop:Generator_ColumnPropNameInTable="EditorColumn" msprop:Generator_UserColumnName="Editor" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

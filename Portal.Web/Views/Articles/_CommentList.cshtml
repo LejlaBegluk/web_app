@@ -1,0 +1,146 @@
+﻿@model Portal.Data.ViewModels.Comment.CommentSelectViewModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+    <div class="x_title">
+        <h3><i class="fa fa-add"></i> @Model.Comments.Count() comments </h3>
+        <div class="clearfix"></div>
+    </div>
+@if (Model.IsLogged)
+{
+    <div class="control-label col-md-12 col-sm-12">
+        @Html.HiddenFor(m => m.ArticleID)
+        <div class="col-md-8 col-sm-9" style="padding: 0;">
+            <textarea cols="130" rows="3" id="CommentContent" placeholder="Add a public comment" onkeyup="ValidationCheck()"></textarea>
+        </div>
+        <div class="col-md-8 col-sm-9">
+            <span id="CommentValidation" class="text-danger" style="display: none;">Comment can not be empty</span>
+        </div>
+        <div class="col-md-12">
+            <div class="btn-group pull-right" style="margin-bottom:10px; margin-right:0;">
+                <a class="btn btn-primary" onclick="AddComment()" style="color:white; text-decoration:none">Add a comment</a>
+                <a class="btn btn-secondary" onclick="Cancel()">Cancel</a>
+            </div>
+        </div>
+    </div>
+}
+else
+{
+    <div class="form-group">
+        <span style="text-align:center; margin-left:10px;">If you want to comment an article, you need to <a asp-action="Login" asp-controller="Account" style="color:cornflowerblue;">login</a>.</span>
+    </div>
+}
+<table class="table">
+    <thead>
+        <tr style="border:none;">
+        </tr>
+    </thead>
+    <tbody>
+        @if (!Model.Comments.Any())
+        {
+            <tr style="border-bottom:1px solid #dee2e6">
+                <td colspan="1" style="text-align:center">No comments to show</td>
+            </tr>
+
+        }
+        else
+        {
+            @foreach (var item in Model.Comments)
+            {
+                <tr>
+                    <td>
+                        <i class="fa fa-user"></i> @item.UserName
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Content)
+                    </td>
+                    <td>
+                        @if (item.CanDelete)
+                        {
+                            <form asp-action="Delete" asp-controller="Comments" asp-route-id="@item.Id" method="post">
+                                <button type="submit" class="btn btn-sm btn-danger pull-right" name="delete-Comment" title="Delete"><i class="fa fa-trash-o"></i></button>
+                            </form>
+                        }
+                    </td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>
+
+
+@* Delete modal *@
+<div id="confirm" class="modal hide fade">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title text-danger">Delete comment</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p class="text-danger">Do you really want to delete this comment?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="delete" name="delete" class="btn btn-danger">Delete</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    $('button[name="delete-Comment"]').on('click', function (e) {
+        var $form = $(this).closest('form');
+        e.preventDefault();
+        $('#confirm').modal({
+            backdrop: 'static',
+            keyboard: false
+        })
+            .on('click', '#delete', function (e) {
+                $form.trigger('submit');
+            });
+    });
+    var Cancel = function () {
+        $("#CommentContent").val("");
+        document.getElementById("CommentValidation").style.display = "none";
+    }
+    var ValidationCheck = function () {
+        console.log("comment")
+        if (!$.trim($("#CommentContent").val())) {
+            
+            document.getElementById("CommentValidation").style.display = "block";c
+        }
+        else {
+            document.getElementById("CommentValidation").style.display = "none";
+        }
+    }
+    var AddComment = function () {
+
+        var Content = $("#CommentContent").val();
+        var ArticleId = $("#ArticleID").val();
+        if (!$.trim($("#CommentContent").val())) {
+          document.getElementById("CommentValidation").style.display = "block";
+        }
+        else {
+         document.getElementById("CommentValidation").style.display = "none";
+                       
+            jQuery.ajax(
+                {
+                    url: '/Comments/Save',
+                    type: "GET",
+                    dataType: "JSON",
+                    data: {
+                        Content: Content,
+                        ArticleID: ArticleId
+                    },
+                    success: function (result) {
+                        location.reload();
+                    }
+                });
+        }
+    }
+</script>
