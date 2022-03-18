@@ -9,7 +9,7 @@
 
 
 <h1 class="text-center">@ViewData["Title"]</h1>
-
+<input id="Filter" value="@ViewBag.UserFilter" hidden/>
 @if (!Model.Users.Any())
 {
     <h1 class="text-center text-warning">There is no users</h1>
@@ -28,7 +28,7 @@ else
                asp-route-pageSize="@Model.PageSize"
                asp-route-filter="Users"
                asp-route-search="@Model.Search"
-               asp-route-orderBy="@Model.OrderBy">
+               asp-route-orderBy="@Model.OrderBy" id="btnAll">
                 All Users
             </a>
             <a class="btn btn-primary" asp-action="UserManagement"
@@ -36,7 +36,7 @@ else
                asp-route-pageSize="@Model.PageSize"
                asp-route-filter="Journalist"
                asp-route-search="@Model.Search"
-               asp-route-orderBy="@Model.OrderBy">
+               asp-route-orderBy="@Model.OrderBy" id="btnJournalist">
                 Journalists
             </a>
             <a class="btn btn-primary" asp-action="UserManagement"
@@ -44,7 +44,7 @@ else
                asp-route-pageSize="@Model.PageSize"
                asp-route-filter="Administrator"
                asp-route-search="@Model.Search"
-               asp-route-orderBy="@Model.OrderBy">
+               asp-route-orderBy="@Model.OrderBy" id="btnAdmin">
                 Administrators
             </a>
             <a class="btn btn-primary" asp-action="UserManagement"
@@ -52,7 +52,7 @@ else
                asp-route-pageSize="@Model.PageSize"
                asp-route-filter="Editor"
                asp-route-search="@Model.Search"
-               asp-route-orderBy="@Model.OrderBy">
+               asp-route-orderBy="@Model.OrderBy" id="btnEditors">
                 Editors
             </a>
 
@@ -118,7 +118,7 @@ else
                     </td>
                     <td class="col-2">
                         <form asp-action="DeleteUser" asp-route-id="@user.Id" method="post">
-                            <a class="btn btn-sm btn-warning" asp-action="EditUser" asp-route-id="@user.Id"><i class="fa fa-pencil"></i></a>
+                            <a class="btn btn-sm btn-primary" asp-action="EditUser" asp-route-id="@user.Id"><i class="fa fa-pencil"></i></a>
                             <button type="submit" name="delete-user" class="btn btn-sm btn-danger">
                                 <i class="fa fa-trash-o"></i>
                             </button>
@@ -142,15 +142,15 @@ else
                    asp-route-pageSize="@Model.PageSize"
                    asp-route-filter="Users"
                    asp-route-search="@Model.Search"
-                   asp-route-orderBy="@Model.OrderBy">
+                   asp-route-orderBy="@Model.OrderBy"  >
                     All
                 </a>
-                <a class="btn btn-primary" asp-action="UserManagement"
+                <a class="btn btn-info" asp-action="UserManagement"
                    asp-route-pageNumber="1)"
                    asp-route-pageSize="@Model.PageSize"
                    asp-route-filter="Journalist"
                    asp-route-search="@Model.Search"
-                   asp-route-orderBy="@Model.OrderBy">
+                   asp-route-orderBy="@Model.OrderBy"  >
                     Journalists
                 </a>
                 <a class="btn btn-primary" asp-action="UserManagement"
@@ -158,7 +158,7 @@ else
                    asp-route-pageSize="@Model.PageSize"
                    asp-route-filter="Administrator"
                    asp-route-search="@Model.Search"
-                   asp-route-orderBy="@Model.OrderBy">
+                   asp-route-orderBy="@Model.OrderBy" >
                     Admins
                 </a>
                 <a class="btn btn-primary" asp-action="UserManagement"
@@ -166,7 +166,7 @@ else
                    asp-route-pageSize="@Model.PageSize"
                    asp-route-filter="Editor"
                    asp-route-search="@Model.Search"
-                   asp-route-orderBy="@Model.OrderBy">
+                   asp-route-orderBy="@Model.OrderBy" >
                     Editors
                 </a>
 
@@ -228,7 +228,7 @@ else
                 </ul>
                 <div class="card-body">
                     <form asp-action="DeleteUser" asp-route-id="@user.Id" method="post">
-                        <a class="btn btn-sm btn-warning" asp-action="EditUser" asp-route-id="@user.Id"><i class="fa fa-pencil"></i></a>
+                        <a class="btn btn-sm btn-primary" asp-action="EditUser" asp-route-id="@user.Id"><i class="fa fa-pencil"></i></a>
                         <button type="submit" name="delete-user" class="btn btn-sm btn-danger">
                             <i class="fa fa-trash-o"></i>
                         </button>
@@ -342,7 +342,7 @@ else
                     </ul>
                     <div class="card-body">
                         <form asp-action="DeleteUser" asp-route-id="@user.Id" method="post">
-                            <a class="btn btn-sm btn-warning" asp-action="EditUser" asp-route-id="@user.Id"><i class="fa fa-pencil"></i></a>
+                            <a class="btn btn-sm btn-primary" asp-action="EditUser" asp-route-id="@user.Id"><i class="fa fa-pencil"></i></a>
                             <button type="submit" name="delete-user" class="btn btn-sm btn-danger">
                                 <i class="fa fa-trash-o"></i>
                             </button>
@@ -451,6 +451,28 @@ else
                 });
         });
 
+        $(document).ready(function () {
+            var filter = $("#Filter").val();
+            console.log(filter);
+            if (filter == "Editor") {
+                $('#btnEditors').removeClass('btn btn-primary');
+                $('#btnEditors').addClass('btn btn-info');
+            }
+            else if (filter == "Users") {
+                $('#btnAll').removeClass('btn btn-primary');
+                $('#btnAll').addClass('btn btn-info');
+            }
+            else if (filter == "Journalist") {
+                $('#btnJournalist').removeClass('btn btn-primary');
+                $('#btnJournalist').addClass('btn btn-info');
+            }
+            else if (filter == "Administrator") {
+                $('#btnAdmin').removeClass('btn btn-primary');
+                $('#btnAdmin').addClass('btn btn-info');
+            }
+           
+        });
+     
     </script>
 }
 

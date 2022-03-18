@@ -12,6 +12,7 @@ using Portal.Data.Entities;
 using Portal.Data.Helpers;
 using Portal.Data.Helpers.HelpersInterfaces;
 using Portal.Data.ViewModels.Poll;
+using Portal.Data.ViewModels.PollAnswer;
 using Portal.Persistance.Repositories.Interfaces;
 using Portal.Web.Extensions.Alerts;
 
@@ -74,8 +75,35 @@ namespace Portal.Web.Controllers
         // GET: Polls/Details/5
         public async Task<IActionResult> Details(bool answered=false)
         {
-            var poll = _context.Polls.Where(p=>p.Active==true).FirstOrDefault();
+            Poll poll = new Poll();
+            PollDetailsViewModel model = new PollDetailsViewModel();
+            poll = _context.Polls.Where(p=>p.Active==true).FirstOrDefault();
+            if(poll != null) { 
             poll.PollAnswers = await _context.PollAnswer.Where(a => a.PollId == poll.Id).ToListAsync();
+                model.Question = poll.Question;
+                model.PollAnswers = new List<PollAnswerIndexViewModel>();
+                foreach (var a in poll.PollAnswers)
+                {
+                    model.PollAnswers.Add(new PollAnswerIndexViewModel()
+                    {
+                        Counter = a.Counter,
+                        Id = a.Id,
+                        Text = a.Text
+
+                    });
+                }
+                var total = model.PollAnswers.Sum(a => a.Counter);
+                foreach(var x in model.PollAnswers)
+                {
+                    if (total != 0) { 
+                    x.Percentage = Math.Round((decimal)x.Counter / (decimal)total * 100, 2);
+                    }
+                    else {
+                        x.Percentage = 0;
+                    }
+
+                }
+            }
             if (answered)
             {
                 ViewBag.QuestionAnswered = "Yes";
@@ -84,7 +112,7 @@ namespace Portal.Web.Controllers
             {
                 ViewBag.QuestionAnswered = "No";
             }
-            return PartialView(poll);
+            return PartialView(model);
         }
         [HttpPost]
         public async Task<IActionResult> Answer(Guid Answered)
@@ -196,7 +224,7 @@ namespace Portal.Web.Controllers
                 {
                     if (poll.Active == true)
                     {
-                        var CurrentActivePoll = _context.Polls.Where(p => p.Active == true).FirstOrDefault();
+                        var CurrentActivePoll = _context.Polls.Where(p => p.Active == true && p.Id!= poll.Id).FirstOrDefault();
                         if (CurrentActivePoll != null) { 
                         CurrentActivePoll.Active = false;
                         _context.Polls.Update(CurrentActivePoll);

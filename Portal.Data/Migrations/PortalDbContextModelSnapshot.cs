@@ -263,6 +263,59 @@ namespace Portal.Data.Migrations
                     b.ToTable("Comments");
                 });
 
+            modelBuilder.Entity("Portal.Data.Entities.CorrespondentArticle", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<bool>("Active")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Content")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreateOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("CorrespondentArticles");
+                });
+
+            modelBuilder.Entity("Portal.Data.Entities.CorrespondentArticlePhoto", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("CorrespondentArticleId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("DateAdded")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PublicId")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Url")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CorrespondentArticleId");
+
+                    b.ToTable("CorrespondentArticlePhotos");
+                });
+
             modelBuilder.Entity("Portal.Data.Entities.Country", b =>
                 {
                     b.Property<Guid>("Id")
@@ -599,6 +652,24 @@ namespace Portal.Data.Migrations
                     b.HasOne("Portal.Data.Entities.User", "User")
                         .WithMany("Comments")
                         .HasForeignKey("UserId");
+                });
+
+            modelBuilder.Entity("Portal.Data.Entities.CorrespondentArticle", b =>
+                {
+                    b.HasOne("Portal.Data.Entities.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Portal.Data.Entities.CorrespondentArticlePhoto", b =>
+                {
+                    b.HasOne("Portal.Data.Entities.CorrespondentArticle", "CorrespondentArticle")
+                        .WithMany()
+                        .HasForeignKey("CorrespondentArticleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Portal.Data.Entities.Employee", b =>

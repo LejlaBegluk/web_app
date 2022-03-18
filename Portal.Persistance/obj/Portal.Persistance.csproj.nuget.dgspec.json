@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\lejla.begluk\\web_app\\webapp\\web-app-mvc\\Portal.Persistance\\Portal.Persistance.csproj": {}
+    "C:\\Users\\lejla.begluk\\source\\Faculty\\web_app\\Portal.Persistance\\Portal.Persistance.csproj": {}
   },
   "projects": {
-    "C:\\Users\\lejla.begluk\\web_app\\webapp\\web-app-mvc\\Portal.Data\\Portal.Data.csproj": {
+    "C:\\Users\\lejla.begluk\\source\\Faculty\\web_app\\Portal.Data\\Portal.Data.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\lejla.begluk\\web_app\\webapp\\web-app-mvc\\Portal.Data\\Portal.Data.csproj",
+        "projectUniqueName": "C:\\Users\\lejla.begluk\\source\\Faculty\\web_app\\Portal.Data\\Portal.Data.csproj",
         "projectName": "Portal.Data",
-        "projectPath": "C:\\Users\\lejla.begluk\\web_app\\webapp\\web-app-mvc\\Portal.Data\\Portal.Data.csproj",
+        "projectPath": "C:\\Users\\lejla.begluk\\source\\Faculty\\web_app\\Portal.Data\\Portal.Data.csproj",
         "packagesPath": "C:\\Users\\lejla.begluk\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\lejla.begluk\\web_app\\webapp\\web-app-mvc\\Portal.Data\\obj\\",
+        "outputPath": "C:\\Users\\lejla.begluk\\source\\Faculty\\web_app\\Portal.Data\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -29,6 +29,7 @@
         },
         "frameworks": {
           "netcoreapp3.1": {
+            "targetAlias": "netcoreapp3.1",
             "projectReferences": {}
           }
         },
@@ -40,6 +41,7 @@
       },
       "frameworks": {
         "netcoreapp3.1": {
+          "targetAlias": "netcoreapp3.1",
           "dependencies": {
             "AspNetCore.Reporting": {
               "target": "Package",
@@ -121,18 +123,18 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.100\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.302\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\lejla.begluk\\web_app\\webapp\\web-app-mvc\\Portal.Persistance\\Portal.Persistance.csproj": {
+    "C:\\Users\\lejla.begluk\\source\\Faculty\\web_app\\Portal.Persistance\\Portal.Persistance.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\lejla.begluk\\web_app\\webapp\\web-app-mvc\\Portal.Persistance\\Portal.Persistance.csproj",
+        "projectUniqueName": "C:\\Users\\lejla.begluk\\source\\Faculty\\web_app\\Portal.Persistance\\Portal.Persistance.csproj",
         "projectName": "Portal.Persistance",
-        "projectPath": "C:\\Users\\lejla.begluk\\web_app\\webapp\\web-app-mvc\\Portal.Persistance\\Portal.Persistance.csproj",
+        "projectPath": "C:\\Users\\lejla.begluk\\source\\Faculty\\web_app\\Portal.Persistance\\Portal.Persistance.csproj",
         "packagesPath": "C:\\Users\\lejla.begluk\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\lejla.begluk\\web_app\\webapp\\web-app-mvc\\Portal.Persistance\\obj\\",
+        "outputPath": "C:\\Users\\lejla.begluk\\source\\Faculty\\web_app\\Portal.Persistance\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -150,9 +152,10 @@
         },
         "frameworks": {
           "netcoreapp3.1": {
+            "targetAlias": "netcoreapp3.1",
             "projectReferences": {
-              "C:\\Users\\lejla.begluk\\web_app\\webapp\\web-app-mvc\\Portal.Data\\Portal.Data.csproj": {
-                "projectPath": "C:\\Users\\lejla.begluk\\web_app\\webapp\\web-app-mvc\\Portal.Data\\Portal.Data.csproj"
+              "C:\\Users\\lejla.begluk\\source\\Faculty\\web_app\\Portal.Data\\Portal.Data.csproj": {
+                "projectPath": "C:\\Users\\lejla.begluk\\source\\Faculty\\web_app\\Portal.Data\\Portal.Data.csproj"
               }
             }
           }
@@ -165,6 +168,7 @@
       },
       "frameworks": {
         "netcoreapp3.1": {
+          "targetAlias": "netcoreapp3.1",
           "dependencies": {
             "AspNetCore.Reporting": {
               "target": "Package",
@@ -202,7 +206,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.100\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.302\\RuntimeIdentifierGraph.json"
         }
       }
     }

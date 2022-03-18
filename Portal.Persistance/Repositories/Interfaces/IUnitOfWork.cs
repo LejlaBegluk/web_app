@@ -17,6 +17,9 @@ namespace Portal.Persistance.Repositories.Interfaces
         public IPollRepository Polls { get; }
 
         public IArticlePhotoRepository ArticlePhotos { get; }
+        public ICorrespondentArticleRepository CorrespondentArticles { get; }
+        public ICorrespondentArticlePhotoRepository CorrespondentArticlePhotos { get; }
+
         Task<int> CompleteAsync();
 
 

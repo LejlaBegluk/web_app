@@ -9930,6 +9930,7 @@
       "path": "system.security.cryptography.primitives/4.3.0",
       "files": [
         ".nupkg.metadata",
+        ".signature.p7s",
         "ThirdPartyNotices.txt",
         "dotnet_library_license.txt",
         "lib/MonoAndroid10/_._",
@@ -11459,11 +11460,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\lejla.begluk\\web_app\\webapp\\web-app-mvc\\Portal.Tests\\Portal.Tests.csproj",
+      "projectUniqueName": "C:\\Users\\lejla.begluk\\source\\Faculty\\web_app\\Portal.Tests\\Portal.Tests.csproj",
       "projectName": "Portal.Tests",
-      "projectPath": "C:\\Users\\lejla.begluk\\web_app\\webapp\\web-app-mvc\\Portal.Tests\\Portal.Tests.csproj",
+      "projectPath": "C:\\Users\\lejla.begluk\\source\\Faculty\\web_app\\Portal.Tests\\Portal.Tests.csproj",
       "packagesPath": "C:\\Users\\lejla.begluk\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\lejla.begluk\\web_app\\webapp\\web-app-mvc\\Portal.Tests\\obj\\",
+      "outputPath": "C:\\Users\\lejla.begluk\\source\\Faculty\\web_app\\Portal.Tests\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -11481,9 +11482,10 @@
       },
       "frameworks": {
         "netcoreapp3.1": {
+          "targetAlias": "netcoreapp3.1",
           "projectReferences": {
-            "C:\\Users\\lejla.begluk\\web_app\\webapp\\web-app-mvc\\Portal.Web\\Portal.Web.csproj": {
-              "projectPath": "C:\\Users\\lejla.begluk\\web_app\\webapp\\web-app-mvc\\Portal.Web\\Portal.Web.csproj"
+            "C:\\Users\\lejla.begluk\\source\\Faculty\\web_app\\Portal.Web\\Portal.Web.csproj": {
+              "projectPath": "C:\\Users\\lejla.begluk\\source\\Faculty\\web_app\\Portal.Web\\Portal.Web.csproj"
             }
           }
         }
@@ -11496,6 +11498,7 @@
     },
     "frameworks": {
       "netcoreapp3.1": {
+        "targetAlias": "netcoreapp3.1",
         "dependencies": {
           "AspNetCore.Reporting": {
             "target": "Package",
@@ -11545,14 +11548,11 @@
         "assetTargetFallback": true,
         "warn": true,
         "frameworkReferences": {
-          "Microsoft.AspNetCore.App": {
-            "privateAssets": "none"
-          },
           "Microsoft.NETCore.App": {
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.100\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.302\\RuntimeIdentifierGraph.json"
       }
     }
   },

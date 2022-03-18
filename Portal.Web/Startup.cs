@@ -70,11 +70,14 @@ namespace Portal.Web
             services.AddTransient<IArticleFilterOrderHelper, ArticleFilterOrderHelper>();
             services.AddTransient<ICategoryFilterOrderHelper, CategoryFilterOrderHelper>();
             services.AddTransient<IPollFilterOrderHelper, PollFilterOrderHelper>();
+            services.AddTransient<ICorrespondentArticleFilterOrderHelper, CorrespondentArticleFilterOrderHelper>();
 
             services.AddTransient<IMailService, MailService>();
             services.AddTransient<IPhotoService, PhotoService>();
             services.AddSingleton<IAuthorizationHandler, ArticleAuthorizationHandler>();
             services.AddSingleton<IAuthorizationHandler, UserAuthorizationHandler>();
+          
+
 
         }
 

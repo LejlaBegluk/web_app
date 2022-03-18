@@ -1,0 +1,124 @@
+﻿@using Portal.Data.ViewModels.Article
+@model ArticleHomeListViewModel
+@{
+    ViewData["Title"] = "Home Page";
+}
+<div style="margin-top:10px;">
+    @if (Model.SelectedList == "News")
+    {
+        <a class="title-style" asp-area="" asp-controller="Home" asp-action="Index"> Home </a> <span style="color:lightgray;">></span><span style="color:red;" class="title-style">  News </span>
+    }
+    @if (Model.SelectedList == "Sport")
+    {
+<a class="title-style" asp-area="" asp-controller="Home" asp-action="Index"> Home </a> <span style="color:lightgray;">></span><span style="color:green;" class="title-style">  Sport </span>
+    } 
+    @if (Model.SelectedList == "Business")
+    {
+<a class="title-style" asp-area="" asp-controller="Home" asp-action="Index"> Home </a> <span style="color:lightgray;">></span><span style="color:darkblue;" class="title-style">  Business </span>
+    }
+</div>
+<div class="page-wrapper">
+    <div class="threeSpread">
+        @if (Model.SelectedList == "News")
+        {
+            @for (int i = 0; i < Model.News.Count(); i++)
+            {
+                <div class="post-box">
+
+                    @if (Model.News[i].Photo == null)
+                    {
+
+
+                        <img src="~/Images/news.jpg" class="slider-image">
+                        <div class="post-info">
+                            <h6><a asp-action="Details" asp-controller="Articles" asp-route-id="@Model.News[i].Id">@Model.News[i].Title</a></h6>
+                            <i class="fa fa-heart"> @Model.News[i].Likes </i>
+                            <i class="fa fa-calendar"> @Model.News[i].CreateOn.ToShortDateString()</i>
+
+                        </div>
+                    }
+                    else
+                    {
+                        <img src="@Model.News[i].Photo.Url" class="slider-image">
+                        <div class="post-info">
+                            <h6><a asp-action="Details" asp-controller="Articles" asp-route-id="@Model.News[i].Id">@Model.News[i].Title</a></h6>
+                            <i class="fa fa-heart"> @Model.News[i].Likes</i>
+                            <i class="fa fa-calendar"> @Model.News[i].CreateOn.ToShortDateString()</i>
+                        </div>
+                    }
+                    
+
+                </div>
+            }
+
+        }
+        @if (Model.SelectedList == "Sport")
+        {
+            <div class="threeSpread">
+                @for (int i = 0; i < Model.Sport.Count(); i++)
+                {
+                    <div class="post-box">
+
+                        @if (Model.Sport[i].Photo == null)
+                        {
+
+
+                            <img src="~/Images/news.jpg" class="slider-image">
+                            <div class="post-info">
+                                <h6><a asp-action="Details" asp-controller="Articles" asp-route-id="@Model.Sport[i].Id">@Model.Sport[i].Title</a></h6>
+                                <i class="fa fa-heart"> @Model.Sport[i].Likes </i>
+                                <i class="fa fa-calendar"> @Model.Sport[i].CreateOn.ToShortDateString()</i>
+
+                            </div>
+                        }
+                        else
+                        {
+                            <img src="@Model.Sport[i].Photo.Url" class="slider-image">
+                            <div class="post-info">
+                                <h6><a asp-action="Details" asp-controller="Articles" asp-route-id="@Model.Sport[i].Id">@Model.Sport[i].Title</a></h6>
+                                <i class="fa fa-heart"> @Model.Sport[i].Likes</i>
+                                <i class="fa fa-calendar"> @Model.Sport[i].CreateOn.ToShortDateString()</i>
+                            </div>
+                        }
+                        
+
+                    </div>
+                }
+            </div>
+        }
+        @if (Model.SelectedList == "Business")
+        {
+    <div class="threeSpread">
+        @for (int i = 0; i < Model.Buisness.Count(); i++)
+        {
+            <div class="post-box">
+
+                @if (Model.Buisness[i].Photo == null)
+                {
+
+
+                    <img src="~/Images/news.jpg" class="slider-image">
+                    <div class="post-info">
+                        <h6><a asp-action="Details" asp-controller="Articles" asp-route-id="@Model.Buisness[i].Id">@Model.Buisness[i].Title</a></h6>
+                        <i class="fa fa-heart"> @Model.Buisness[i].Likes </i>
+                        <i class="fa fa-calendar"> @Model.Buisness[i].CreateOn.ToShortDateString()</i>
+
+                    </div>
+                }
+                else
+                {
+                    <img src="@Model.Buisness[i].Photo.Url" class="slider-image">
+                    <div class="post-info">
+                        <h6><a asp-action="Details" asp-controller="Articles" asp-route-id="@Model.Buisness[i].Id">@Model.Buisness[i].Title</a></h6>
+                        <i class="fa fa-heart"> @Model.Buisness[i].Likes</i>
+                        <i class="fa fa-calendar"> @Model.Buisness[i].CreateOn.ToShortDateString()</i>
+                    </div>
+                }
+                
+
+            </div>
+        }
+    </div>
+                }
+            </div>
+        </div>

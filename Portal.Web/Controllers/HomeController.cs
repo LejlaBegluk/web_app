@@ -29,12 +29,15 @@ namespace Portal.Web.Controllers
         public IActionResult Index()
         {
 
-            var List = _unitOfWork.Articles.GetAll().Where(a=>a.Active==true).OrderByDescending(a => a.CreateOn).Take(15).ToList();
-            List<ArticleHomeViewModel> HomeList = new List<ArticleHomeViewModel>();
-            foreach (var item in List)
+            ArticleHomeListViewModel HomeList = new ArticleHomeListViewModel();
+            HomeList.News = new List<ArticleHomeViewModel>();
+            HomeList.Buisness= new List<ArticleHomeViewModel>();
+            HomeList.Sport= new List<ArticleHomeViewModel>();
+            var NewsList = _unitOfWork.Articles.GetAll().Where(a => a.Active == true && a.Category.Name=="News").OrderByDescending(a => a.CreateOn).Take(15).ToList();
+            foreach (var item in NewsList)
             {
-                var photo= _unitOfWork.ArticlePhotos.GetAll().Where(p => p.ArticleId == item.Id).Take(1).FirstOrDefault();
-                HomeList.Add(new ArticleHomeViewModel()
+                var photo = _unitOfWork.ArticlePhotos.GetAll().Where(p => p.ArticleId == item.Id).Take(1).FirstOrDefault();
+                HomeList.News.Add(new ArticleHomeViewModel()
                 {
                     Active = item.Active,
                     CategoryId = item.CategoryId,
@@ -45,11 +48,49 @@ namespace Portal.Web.Controllers
                     Title = item.Title,
                     UpdatedOn = item.UpdatedOn,
                     UserId = item.UserId,
-                    Photo= photo
-            });
-               
-                  
+                    Photo = photo
+                });
             }
+            var BuisnessList = _unitOfWork.Articles.GetAll().Where(a => a.Active == true && a.Category.Name == "Business").OrderByDescending(a => a.CreateOn).Take(15).ToList();
+            foreach (var item in BuisnessList)
+            {
+                var photo = _unitOfWork.ArticlePhotos.GetAll().Where(p => p.ArticleId == item.Id).Take(1).FirstOrDefault();
+                HomeList.Buisness.Add(new ArticleHomeViewModel()
+                {
+                    Active = item.Active,
+                    CategoryId = item.CategoryId,
+                    Content = item.Content,
+                    CreateOn = item.CreateOn,
+                    Id = item.Id,
+                    Likes = item.Likes,
+                    Title = item.Title,
+                    UpdatedOn = item.UpdatedOn,
+                    UserId = item.UserId,
+                    Photo = photo
+                });
+            }
+            var SportList = _unitOfWork.Articles.GetAll().Where(a => a.Active == true && a.Category.Name == "Sport").OrderByDescending(a => a.CreateOn).Take(15).ToList();
+            foreach (var item in SportList)
+            {
+                var photo = _unitOfWork.ArticlePhotos.GetAll().Where(p => p.ArticleId == item.Id).Take(1).FirstOrDefault();
+                HomeList.Sport.Add(new ArticleHomeViewModel()
+                {
+                    Active = item.Active,
+                    CategoryId = item.CategoryId,
+                    Content = item.Content,
+                    CreateOn = item.CreateOn,
+                    Id = item.Id,
+                    Likes = item.Likes,
+                    Title = item.Title,
+                    UpdatedOn = item.UpdatedOn,
+                    UserId = item.UserId,
+                    Photo = photo
+                });
+            }
+
+
+
+
             return View(HomeList);
         }
         [Authorize]
@@ -62,6 +103,80 @@ namespace Portal.Web.Controllers
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+        public IActionResult ArticlePage(string SelectedList)
+        {
+            ArticleHomeListViewModel ArticleList = new ArticleHomeListViewModel();
+            ArticleList.SelectedList = SelectedList;
+            ArticleList.News = new List<ArticleHomeViewModel>();
+            ArticleList.Buisness = new List<ArticleHomeViewModel>();
+            ArticleList.Sport = new List<ArticleHomeViewModel>();
+            if (ArticleList.SelectedList == "News")
+            {
+                var NewsList = _unitOfWork.Articles.GetAll().Where(a => a.Active == true && a.Category.Name == "News").OrderByDescending(a => a.CreateOn).Take(15).ToList();
+                foreach (var item in NewsList)
+                {
+                    var photo = _unitOfWork.ArticlePhotos.GetAll().Where(p => p.ArticleId == item.Id).Take(1).FirstOrDefault();
+                    ArticleList.News.Add(new ArticleHomeViewModel()
+                    {
+                        Active = item.Active,
+                        CategoryId = item.CategoryId,
+                        Content = item.Content,
+                        CreateOn = item.CreateOn,
+                        Id = item.Id,
+                        Likes = item.Likes,
+                        Title = item.Title,
+                        UpdatedOn = item.UpdatedOn,
+                        UserId = item.UserId,
+                        Photo = photo
+                    });
+                }
+
+            }
+            else if (ArticleList.SelectedList == "Business")
+            {
+                var BuisnessList = _unitOfWork.Articles.GetAll().Where(a => a.Active == true && a.Category.Name == "Business").OrderByDescending(a => a.CreateOn).Take(15).ToList();
+                foreach (var item in BuisnessList)
+                {
+                    var photo = _unitOfWork.ArticlePhotos.GetAll().Where(p => p.ArticleId == item.Id).Take(1).FirstOrDefault();
+                    ArticleList.Buisness.Add(new ArticleHomeViewModel()
+                    {
+                        Active = item.Active,
+                        CategoryId = item.CategoryId,
+                        Content = item.Content,
+                        CreateOn = item.CreateOn,
+                        Id = item.Id,
+                        Likes = item.Likes,
+                        Title = item.Title,
+                        UpdatedOn = item.UpdatedOn,
+                        UserId = item.UserId,
+                        Photo = photo
+                    });
+                }
+
+            }
+            else if (ArticleList.SelectedList == "Sport")
+            {
+                var SportList = _unitOfWork.Articles.GetAll().Where(a => a.Active == true && a.Category.Name == "Sport").OrderByDescending(a => a.CreateOn).Take(15).ToList();
+                foreach (var item in SportList)
+                {
+                    var photo = _unitOfWork.ArticlePhotos.GetAll().Where(p => p.ArticleId == item.Id).Take(1).FirstOrDefault();
+                    ArticleList.Sport.Add(new ArticleHomeViewModel()
+                    {
+                        Active = item.Active,
+                        CategoryId = item.CategoryId,
+                        Content = item.Content,
+                        CreateOn = item.CreateOn,
+                        Id = item.Id,
+                        Likes = item.Likes,
+                        Title = item.Title,
+                        UpdatedOn = item.UpdatedOn,
+                        UserId = item.UserId,
+                        Photo = photo
+                    });
+                }
+            }
+                return View(ArticleList);
         }
 
     }

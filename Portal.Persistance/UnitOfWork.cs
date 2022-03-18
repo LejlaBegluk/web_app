@@ -22,6 +22,8 @@ namespace Portal.Persistance
         public IAddressRepository Addresses { get; private set; }
         public IArticlePhotoRepository ArticlePhotos { get; private set; }
         public IPollRepository Polls { get; private set; }
+        public ICorrespondentArticleRepository CorrespondentArticles { get; private set; }
+        public ICorrespondentArticlePhotoRepository CorrespondentArticlePhotos { get; private set; }
 
         public UnitOfWork(PortalDbContext context)
         {
@@ -36,6 +38,10 @@ namespace Portal.Persistance
             Addresses = new AddressRepository(_context);
             ArticlePhotos = new ArticlePhotoRepository(_context);
             Polls = new PollRepository(_context);
+            CorrespondentArticles=new CorrespondentArticleRepository(_context);
+            CorrespondentArticlePhotos = new CorrespondentArticlePhotoRepository(_context);
+
+
         }
 
 

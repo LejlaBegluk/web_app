@@ -5512,6 +5512,7 @@
       "path": "system.security.cryptography.primitives/4.3.0",
       "files": [
         ".nupkg.metadata",
+        ".signature.p7s",
         "ThirdPartyNotices.txt",
         "dotnet_library_license.txt",
         "lib/MonoAndroid10/_._",
@@ -6560,11 +6561,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\lejla.begluk\\web_app\\webapp\\web-app-mvc\\Portal.Data\\Portal.Data.csproj",
+      "projectUniqueName": "C:\\Users\\lejla.begluk\\source\\Faculty\\web_app\\Portal.Data\\Portal.Data.csproj",
       "projectName": "Portal.Data",
-      "projectPath": "C:\\Users\\lejla.begluk\\web_app\\webapp\\web-app-mvc\\Portal.Data\\Portal.Data.csproj",
+      "projectPath": "C:\\Users\\lejla.begluk\\source\\Faculty\\web_app\\Portal.Data\\Portal.Data.csproj",
       "packagesPath": "C:\\Users\\lejla.begluk\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\lejla.begluk\\web_app\\webapp\\web-app-mvc\\Portal.Data\\obj\\",
+      "outputPath": "C:\\Users\\lejla.begluk\\source\\Faculty\\web_app\\Portal.Data\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -6582,6 +6583,7 @@
       },
       "frameworks": {
         "netcoreapp3.1": {
+          "targetAlias": "netcoreapp3.1",
           "projectReferences": {}
         }
       },
@@ -6593,6 +6595,7 @@
     },
     "frameworks": {
       "netcoreapp3.1": {
+        "targetAlias": "netcoreapp3.1",
         "dependencies": {
           "AspNetCore.Reporting": {
             "target": "Package",
@@ -6674,7 +6677,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.100\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.302\\RuntimeIdentifierGraph.json"
       }
     }
   },

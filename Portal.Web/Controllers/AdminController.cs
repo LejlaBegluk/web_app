@@ -65,7 +65,7 @@ namespace Portal.Web.Controllers
                 FromDevice = _deviceResolver.Device
             };
             var users = await _userFilterOrderHelper.GetFilteredUsersAsync(conditions);
-
+            ViewBag.UserFilter = filter;
             conditions.Users = await GetUsersForUserManagementView(users, conditions.CurrentPage, conditions.PageSize);
             return View(conditions);
         }

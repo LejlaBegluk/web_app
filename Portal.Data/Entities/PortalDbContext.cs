@@ -19,6 +19,8 @@ namespace Portal.Data.Entities
         public DbSet<ArticlePhoto> ArticlePhotos { get; set; }
         public DbSet<Address> Addresses { get; set; }
         public DbSet<Country> Countries { get; set; }
+        public DbSet<CorrespondentArticle> CorrespondentArticles { get; set; }
+        public DbSet<CorrespondentArticlePhoto> CorrespondentArticlePhotos { get; set; }
 
         public PortalDbContext(DbContextOptions<PortalDbContext> options) : base(options)
         {

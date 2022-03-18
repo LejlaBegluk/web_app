@@ -17,6 +17,6 @@ namespace Portal.Data.ViewModels.Poll
         public Guid UserId { get; set; }
         public bool Active { get; set; }
         public bool IsEditor { get; set; }
-        public virtual ICollection<PollAnswer> PollAnswers { get; set; }
+        public virtual ICollection<Portal.Data.Entities.PollAnswer> PollAnswers { get; set; }
     }
 }

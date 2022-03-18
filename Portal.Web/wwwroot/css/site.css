@@ -134,6 +134,18 @@ body {
 * {
     box-sizing: border-box
 }
+.title-style {
+    font-weight: bold;
+    font-size: 25px;
+    /* font-family:'Times New Roman', Times, serif;*/
+    margin-top: 20px;
+}
+.side-div {
+    display: inline-block;
+    height: 250px;
+    box-shadow:1rem 1rem 1rem -1rem #a0a0a033;
+    width: 91%
+}
 /*--------------------------------details-------------------------*/
 .content-container {
     padding: 20px;
@@ -214,4 +226,32 @@ form.search::after {
     /*width: 60%;
     border: 5px solid #FFFF00;
     padding: 10px;*/
+}
+/**********************************************************ArticlePage**********************************************/
+.post-box {
+    display: inline-block;
+    max-width: 30%;
+   /* background-color:blue;*/
+    margin:10px;
+    width:30%;
+    height:300px;
+
+}
+    .post-box img {
+        width: 100%;
+        height: 200px;
+        border-radius: 5px;
+    }
+    .threeSpread {
+        margin: 0 40px 40px 40px
+    }
+.container a{
+    text-decoration:none;
+}
+
+.active{
+   font-weight:500;
+}
+.slick-arrow.slick-hidden {
+    display:initial !important;
 }

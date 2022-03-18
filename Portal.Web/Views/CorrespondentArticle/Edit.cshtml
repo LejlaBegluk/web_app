@@ -1,0 +1,87 @@
+﻿@model Portal.Data.ViewModels.CorrespondentArticle.AddCorrespondentArticleViewModel
+
+@{
+    ViewData["Title"] = "Edit";
+}
+<h1 style="text-align:center">Edit correspondent article </h1>
+<hr />
+<form asp-action="Edit" enctype="multipart/form-data">
+    <div class="col-md-12 col-sm-12 col-xs-12">
+
+        @Html.HiddenFor(model => model.Id)
+        @Html.HiddenFor(model => model.UserId)
+        @Html.HiddenFor(model => model.CreateOn)
+        @*@Html.HiddenFor(model => model.MainPhoto)*@
+
+
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="col-md-9 col-md-6 p-4 shadow-lg  mb-5 bg-white rounded" style="margin-left:130px;">
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Content, new { @class = "control-label col-md-4 col-sm-3" })
+                    @Html.TextAreaFor(model => model.Content, new { @class = "form-control", @cols = 50, @rows = 15, autocomplete = "off" , disabled = "disabled" })
+                    @Html.ValidationMessageFor(model => model.Content, "", new { @class = "text-danger" })
+                </div>
+                @if (Model.PhotoList != null) { 
+                <div class="row" style="margin-left:1px;">
+                    @foreach (var item in Model.PhotoList)
+                    {
+                        <div class="column">
+                            <img src="@item.Url" alt="Error" width="100" height="100" style="margin:5px;" />
+                            <br />
+                            <a type="button" href="javascript:savePhoto('@item.Url')" id="saveFiles" style="display:block;  width: 40px;height: 40px; margin-left:10px" class="btn btn-primary btn-xs fa-pull-right">
+                                <i class="fa fa-file"></i>
+                            </a>
+                            <br />
+                        </div>
+                    }
+                </div>}
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Active, new { @class = "control-label col-md-2 col-sm-3" })
+
+                    @Html.CheckBoxFor(model => model.Active, new { @style = "width: 30px;height: 30px;" })
+  
+
+                </div>
+                <div class="col-md-12">
+                    <div class="btn-group ">
+                        <button type="submit" class="btn btn-primary fa-pull-right">Submit</button>
+                        <a asp-action="Index" class="btn btn-secondary fa-pull-right">Cancel</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</form>
+
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script>
+        $(document).ready(function () {
+                      $('input[type=text], input[type=password], input[type=email], input[type=tel], select, textarea').each(function () {
+        var req = $(this).attr('data-val-required');
+        if (undefined != req) {
+            var label = $('label[for="' + $(this).attr('name') + '"]');
+            if (label.length == 0) {
+                label = $(this).parent().parent().children("label");
+            }
+            var text = label.text();
+            if (text.length > 0) {
+                if (!text.includes("*")) {
+                    label.append('<span>*</span>');
+                }
+            }
+        }
+     });
+        });
+
+     var savePhoto = function (URL) {
+
+                window.open(URL, '_blank').focus();
+     }
+
+    </script>
+}

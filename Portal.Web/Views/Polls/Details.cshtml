@@ -1,0 +1,80 @@
+﻿@model Portal.Data.ViewModels.Poll.PollDetailsViewModel
+
+@{
+    ViewData["Title"] = "Details";
+    string QuestionAnswered = (string)ViewBag.QuestionAnswered;
+}
+@if (Model != null) { 
+<hr />
+<div >
+    <h3 style="text-align:center; font-weight:600;">Today's survey</h3>
+    @if (QuestionAnswered != "Yes")
+    {
+        <form id="FormPoll" style=" margin-left: 320px; ">
+            <h4>@Model.Question</h4>
+            <fieldset>
+                <input type="hidden" id="Answered" name="Answered" />
+                <ul>
+                    @foreach (var item in Model.PollAnswers)
+                    {
+                        <li>
+                            <label @*class='poll_active'*@>
+
+                                <input type='radio' name='Answered' onclick="AnswerChanged(this.value)" id="@item.Id" value='@item.Id'>
+                                @item.Text
+                            </label>
+                        </li>
+                    }
+                </ul>
+            </fieldset>
+
+        </form>
+        <p class="buttons">
+            <button type="submit" class="btn btn-info" style=" margin-left: 450px; " id="submitBtn" disabled>Vote</button>
+        </p>
+    }
+    else
+    {
+        <div style=" margin-left: 350px; ">
+            <h4>Thank you for your answer!</h4>
+            <table style="margin-left:100px">
+                <thead>
+                    <tr>
+                        <th>Poll</th>
+                        <th>Results</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.PollAnswers)
+                    {
+                        <tr>
+                            <td >@item.Text</td>
+                            <td>@item.Percentage %</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
+
+</div>
+}
+<script>
+    function AnswerChanged(id) {
+        $("#Answered").val(id);
+        document.getElementById('submitBtn').disabled = false;
+    }
+    $("#submitBtn").click(function (event) {
+        var forma = $("#FormPoll");
+        $.ajax(
+            {
+                type: "POST",
+                url: "/Polls/Answer",
+                data: forma.serialize(),
+                success: function (rezultat) {
+                    $("#PollWrapper").html(rezultat);
+                }
+            }
+        );
+    });
+</script>
