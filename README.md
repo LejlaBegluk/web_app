@@ -9,6 +9,7 @@ Microsoft SQL Server Management Studio 2017 (or up) to run the migrations.
 Visual Studio 2019 to run the application.
 
 Running the app
+
 On first app run test data will be inserted into tables, so you can test it right away.
 
 
